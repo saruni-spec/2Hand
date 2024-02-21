@@ -1,0 +1,25 @@
+.nav{
+    display:block;
+   width: 100%;
+   margin-bottom: 40px;
+   margin-top: 0;
+    
+    
+
+}
+.nav li{
+    float: left;
+    display: inline;
+    margin: 2px;
+    padding: 2px;
+}
+.nav li:nth-child(4),li:nth-child(5),li:last-child{
+    float: right;
+}
+
+.nav a{
+    display: block;
+    padding: 8px;
+    text-decoration: none;
+   
+}
