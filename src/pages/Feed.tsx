@@ -71,7 +71,7 @@ const Feed = () => {
           <p>Shop Now</p>
         </div>
         <div className="fullDiv">
-          <p>
+          <p className="visible">
             Our mission is to provide students and parents with affordable,
             reliable uniform solutions, ensuring comfort, style, and durability
             throughout the school year
@@ -233,7 +233,7 @@ const Feed = () => {
         </div>
 
         <div className="fullDiv">
-          <p>
+          <p className="visible">
             Explore our wide selection today and experience hassle-free shopping
             for all your uniform needs!" Whether you're seeking brand new
             apparel or budget-friendly second-hand options, we've got you

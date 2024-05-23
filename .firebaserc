@@ -1,9 +1,5 @@
 {
   "projects": {
-    "default": "hand-f42e4",
-    "store": "hand-f42e4"
-  },
-  "targets": {},
-  "etags": {},
-  "dataconnectEmulatorConfig": {}
+    "default": "smarttravel-393108"
+  }
 }

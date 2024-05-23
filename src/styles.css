@@ -108,6 +108,9 @@ justify-content: center;
 .grid p{
   width: 20%;
 }
+.visible{
+  color: #A09F9D;
+}
 p{
   
   padding: 1%;

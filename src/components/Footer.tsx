@@ -13,14 +13,7 @@ const Footer = () => {
   };
 
   return (
-    <div
-      className="footer"
-      style={{
-        backgroundColor: "#F0E68C",
-        marginTop: "10%",
-        marginBottom: "0",
-      }}
-    >
+    <div className="footer" style={{}}>
       <div>
         <p>
           Stay up to date with the latest offers and promotions by signing up to

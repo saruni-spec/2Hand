@@ -67,6 +67,7 @@ const SignUp = () => {
 
     if (email && password) {
       handleSignUp(email, password);
+      navigate("/");
     }
   };
   return (

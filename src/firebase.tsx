@@ -3,25 +3,21 @@ import { initializeApp } from "firebase/app";
 
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBReXeBZhY7IUnHNJxOreIpnXgSKhi3vWg",
+  apiKey: "AIzaSyCAKH8_LIHDVXpjrFOrG1iugA9QLmYgyTE",
 
-  authDomain: "nuriaa-ad2c8.firebaseapp.com",
+  authDomain: "smarttravel-393108.firebaseapp.com",
 
-  projectId: "nuriaa-ad2c8",
+  projectId: "smarttravel-393108",
 
-  storageBucket: "nuriaa-ad2c8.appspot.com",
+  storageBucket: "smarttravel-393108.appspot.com",
 
-  messagingSenderId: "333838247774",
+  messagingSenderId: "383391503149",
 
-  appId: "1:333838247774:web:6ae80cbcf531d1a23991cf",
+  appId: "1:383391503149:web:9a04a4d492f2af1781b9a4",
 
-  measurementId: "G-HP4ZXN83CJ",
+  measurementId: "G-6VRJ1XEFJY",
 };
 
 // Initialize Firebase
