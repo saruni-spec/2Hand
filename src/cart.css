@@ -1,0 +1,42 @@
+.cart{
+    list-style-type: none;
+    display:flex;
+    flex-direction: column;
+    width:50%;
+
+}
+.cart li{
+    display: flex;
+    flex-direction: row;
+    
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 20%;
+}
+.cart img{
+    width: 30%;
+    height: 90%;
+    margin: 5px;
+    object-fit: contain;
+
+}
+.duo{
+    display: flex;
+    flex-direction: row;
+    
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+}
+
+.form div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+   
+}

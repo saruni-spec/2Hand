@@ -1,16 +1,30 @@
-.homeDiv{
-    display: flex;
-   flex-direction: column;
-    margin: 20px;
-    padding: 2px;
-}
+
 .dualDiv{
     display: flex;
-    flex-direction: row;
+    /* flex-direction: row; */
     justify-content: center;
     align-items: center;
    width: 100%;
     height: 60vh;
+}
+.socials{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 3%;
+    
+    
+
+}
+
+
+ .fullDiv {
+  color: #a5865c;
+ }
+.socials a{
+    margin: 10%;
+    padding: 5px;
+   
 }
 .dualDiv div{
     border: 1px solid rgb(82, 82, 82);
@@ -32,7 +46,7 @@
     height: 60vh;
 }
 .fullDiv{
-    border: 1px solid rgb(82, 82, 82);
+    border: 1px solid #F0E68C;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -40,4 +54,162 @@
     padding: 10px;
     height: 60vh;
     width: 100%;
+}
+.displayList {
+    list-style-type: none;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 5%;
+    max-width: 100%;
+}
+  
+  .displayList li {
+    position: relative;
+    margin-bottom: 10px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius:5px ;
+    
+  }
+  
+  .displayList li button:hover {
+    color: #A09F9D;
+    
+  }
+
+  .displayList li img {
+    width: 90%;
+    height: 80%;
+    object-fit: contain;
+  }
+
+
+.ImageDiv{
+    background-repeat: no-repeat;
+    background-size: auto;
+    display: flex;
+flex-direction: column;
+justify-content: center;
+}
+
+.dual{
+    
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    width: 100%;
+} 
+.dualDiv p{
+  width: 20%;
+}
+.grid p{
+  width: 20%;
+}
+p{
+  
+  padding: 1%;
+  z-index: 10;
+  color: #F0E68C;
+}
+p:hover{
+  cursor: pointer;
+  border: 2px solid #F0E68C;
+  padding: 2%;
+
+}
+
+@media screen and (max-width: 800px) {
+
+  .dualDiv{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   width: 100%;
+    height: 60vh;
+}
+.dualDiv div{
+  border: 1px solid rgb(82, 82, 82);
+  margin: 3px;
+  padding: 10px;
+  width: 100%;
+  height: 50%;
+}
+
+.grid {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  
+}
+
+.fullDiv{
+  border: 1px solid rgb(5, 5, 5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin:3px;
+  padding: 10px;
+  height: 50vh;
+  width: 100%;
+}
+.displayList {
+  list-style-type: none;
+  display:flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 100%;
+  justify-content: center;
+}
+
+.displayList li {
+  position: relative;
+  margin: 3px;
+  margin-bottom: 10px;
+  padding: 5px;
+  
+  width: 100%;
+  height: 50vh;
+
+  
+}
+
+
+.dual{
+  
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  width: 100%;
+} 
+
+.displayList li button {
+  position: absolute;
+  top: 85%;
+  right: 30%;
+  
+}
+
+.displayList li img {
+  position: absolute;
+  top: 5%;
+  left:5%;
+  width: 90%;
+  height: 80%;
+  object-fit: contain;
+}
+
+
+.ImageDiv{
+  background-repeat: no-repeat;
+  background-size: auto;
+  display: flex;
+flex-direction: column;
+justify-content: center;
+}
+
 }

@@ -1,0 +1,47 @@
+.shop{
+    position: fixed;
+    left: 0;
+    top:0;
+    margin: 0;
+    width: 25%;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: #F0E68C;
+    justify-content: space-evenly;
+    padding: 2%;
+    opacity: 1;
+  transform: translateX(0);
+  z-index: 1000;
+}
+.shop li{
+    display: flex;
+    flex-direction: column;
+    padding: 3%;
+    margin: 3%;
+    border:solid 1px black;
+    border-radius: 5px;
+}
+.shop li div{
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    margin: 10px;
+    
+}
+.shop li div label{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+@media screen and (max-width: 800px) {
+    .shop{
+       
+        width: 90%;
+        z-index: 1000;
+        
+    }
+    
+}
