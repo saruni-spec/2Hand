@@ -5,19 +5,13 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB4HARD1loGCCXusjfpXiu3WdwD9we5k2Q",
-
-  authDomain: "nuriaa-657e3.firebaseapp.com",
-
-  projectId: "nuriaa-657e3",
-
-  storageBucket: "nuriaa-657e3.appspot.com",
-
-  messagingSenderId: "567633922043",
-
-  appId: "1:567633922043:web:00c7d6832a6d3741fdad5e",
-
-  measurementId: "G-PE6ZDB30VY",
+  apiKey: process.env.apiKey,
+  authDomain: process.env.authDomain,
+  projectId: process.env.projectId,
+  storageBucket: process.env.storageBucket,
+  messagingSenderId: process.env.messagingSenderId,
+  appId: process.env.appId,
+  measurementId: process.env.measurementId,
 };
 
 // Initialize Firebase

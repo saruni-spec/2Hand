@@ -24,3 +24,4 @@ src/firebase.tsx
 *.njsproj
 *.sln
 *.sw?
+.env
