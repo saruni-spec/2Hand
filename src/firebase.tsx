@@ -5,19 +5,19 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCAKH8_LIHDVXpjrFOrG1iugA9QLmYgyTE",
+  apiKey: "AIzaSyB4HARD1loGCCXusjfpXiu3WdwD9we5k2Q",
 
-  authDomain: "smarttravel-393108.firebaseapp.com",
+  authDomain: "nuriaa-657e3.firebaseapp.com",
 
-  projectId: "smarttravel-393108",
+  projectId: "nuriaa-657e3",
 
-  storageBucket: "smarttravel-393108.appspot.com",
+  storageBucket: "nuriaa-657e3.appspot.com",
 
-  messagingSenderId: "383391503149",
+  messagingSenderId: "567633922043",
 
-  appId: "1:383391503149:web:9a04a4d492f2af1781b9a4",
+  appId: "1:567633922043:web:00c7d6832a6d3741fdad5e",
 
-  measurementId: "G-6VRJ1XEFJY",
+  measurementId: "G-PE6ZDB30VY",
 };
 
 // Initialize Firebase

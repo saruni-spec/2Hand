@@ -64,8 +64,12 @@
   }
   .row1{
     width: 40%;
+    max-width: 40vw;
+    max-height: 60vh;
     height: 80%;
     margin: 5%;
+    border: 2px solid black;
+
   }
   .row2{
     width: 40%;
@@ -124,6 +128,12 @@
   100% { transform: rotate(360deg); }
 }
 
+#image-input{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
  @media screen and (max-width: 800px) {
   .uniform-form {
     width: 90%;
@@ -156,7 +166,7 @@
   width: 90%;
   padding: 2rem;
   margin-left: 5%;
-  height: fit-content;
+  
  
  
   
@@ -165,13 +175,14 @@
   
   .row1{
     width: 90%;
+    max-width: 90vw;
     height: 40%;
+    max-height: 40vh;
     margin: 5%;
     margin-top: 0;
   }
   .row2{
     width: 90%;
-    height: 40%;
     display: flex;
     flex-direction: column;
     align-content: center;

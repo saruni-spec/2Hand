@@ -6,25 +6,28 @@
     padding: 2rem;
     margin: 10;
    width: 30%;
-   border: 1px solid rgb(82, 82, 82);
+  
     margin: 5px;
     padding: 15px;
     height: 100%;
    
    
 }
-
-.form-input{
-    margin: 2%;
-    padding: 1rem;
+.login-button{
     width: 70%;
-    border-bottom: 1px solid rgb(82, 82, 82);
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    background-color: transparent;
+   
+    
+}
+.login-button p{
+    
+    width: 100%;
 }
 
+.form-input{
+    width: 70%;
+    margin-bottom: 10%;
+    
+}
 .formDiv{
     display: flex;
     /* flex-direction: row; */
@@ -39,4 +42,22 @@
     padding: 15px;
     width: 70%;
     height: 100%;
+}
+
+@media screen and (max-width: 800px) {
+    
+    .formDiv div{
+        display: none;
+
+    }
+    .form-input{
+        width: 70%;
+        margin-bottom: 15%;
+        
+        
+    }
+    .login{
+        width: 100%;
+        
+    }
 }

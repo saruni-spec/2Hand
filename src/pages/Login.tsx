@@ -1,10 +1,16 @@
 import "../otherforms.css";
 import Nav from "../components/Nav";
-import "../styles.css";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FirebaseError } from "firebase/app";
+import black from "../assets/images/black.avif";
+import Footer from "../components/Footer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faRightToBracket,
+  faUserPlus,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -51,6 +57,10 @@ const Login = () => {
     }
   };
 
+  const handleSignUp = () => {
+    navigate("/sign-up");
+  };
+
   return (
     <>
       <Nav />
@@ -68,11 +78,31 @@ const Login = () => {
             placeholder="Enter Password"
             name="password"
           />
-          <button type="submit">Login</button>
+          <button type="submit" className="login-button">
+            <p>
+              Login <FontAwesomeIcon icon={faRightToBracket} />
+            </p>
+          </button>
+          <button
+            type="button"
+            onClick={() => handleSignUp()}
+            className="login-button"
+          >
+            <p>
+              Sign up <FontAwesomeIcon icon={faUserPlus} />
+            </p>
+          </button>
         </form>
 
-        <div></div>
+        <div
+          style={{
+            backgroundImage: `url(${black})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+          }}
+        ></div>
       </div>
+      <Footer />
     </>
   );
 };

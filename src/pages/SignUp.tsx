@@ -1,6 +1,5 @@
 import "../otherforms.css";
 import Nav from "../components/Nav";
-import "../styles.css";
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
@@ -9,6 +8,10 @@ import {
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { FirebaseError } from "firebase/app";
+import black from "../assets/images/black.avif";
+import Footer from "../components/Footer";
+import { faUserPlus } from "@fortawesome/free-solid-svg-icons/faUserPlus";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -93,11 +96,23 @@ const SignUp = () => {
             placeholder="Confirm Password"
           />
 
-          <button type="submit">Sign Up</button>
+          <button type="submit">
+            {" "}
+            <p>
+              Sign up <FontAwesomeIcon icon={faUserPlus} />
+            </p>
+          </button>
         </form>
 
-        <div></div>
+        <div
+          style={{
+            backgroundImage: `url(${black})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+          }}
+        ></div>
       </div>
+      <Footer />
     </>
   );
 };

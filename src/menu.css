@@ -1,6 +1,6 @@
 .menu{
     
-    transition: opacity 1s ease, transform 1s ease;
+    transition: opacity 5s ease, transform 5s ease;
   opacity: 0;
   transform: translateX(-100%);
 }
@@ -37,17 +37,21 @@
     margin: 1.5%;
     align-items: center;
     justify-content: space-between;
+    color: black;
 }
 .menu li:last-child{
   margin-top: 70%;
+  margin-left: 3%;
 }
 .menu li:hover {
   cursor: pointer;
     background-color: #A09F9D;
 }
 .menu li:last-child:hover{
-  background-color:#A09F9D ;
+  background-color:transparent ;
 }
+
+
 
 
 .closeMenu{
@@ -71,7 +75,7 @@
   padding: 0;
   margin: 2%;
   cursor: pointer;
-  z-index: 110;
+  z-index: 10000;
 }
 
 

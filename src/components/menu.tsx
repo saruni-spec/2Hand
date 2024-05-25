@@ -14,6 +14,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import "../menu.css";
 import ShopMenu from "./ShopMenu";
+import { useNavigate } from "react-router-dom";
 
 const Menu = () => {
   const [menuVisible, setMenuVisible] = useState(false);
@@ -42,6 +43,12 @@ const Menu = () => {
   const toggleFilterVisible = () => {
     setFilterVisible(!filterVisible);
     setMenuVisible(!menuVisible);
+  };
+
+  const navigate = useNavigate();
+
+  const shopVisible = () => {
+    setFilterVisible(false);
   };
 
   return (
@@ -74,17 +81,33 @@ const Menu = () => {
             >
               Shop <FontAwesomeIcon icon={faArrowRight} />
             </li>
-            <li onClick={() => {}}>
+            <li
+              onClick={() => {
+                navigate("/about");
+              }}
+            >
               About
               <FontAwesomeIcon icon={faArrowRight} />
             </li>
-            <li onClick={() => {}}>
+            <li
+              onClick={() => {
+                navigate("/add-item");
+              }}
+            >
               Sell <FontAwesomeIcon icon={faArrowRight} />
             </li>
-            <li onClick={() => {}}>
+            <li
+              onClick={() => {
+                navigate("/contact");
+              }}
+            >
               Contact Us <FontAwesomeIcon icon={faArrowRight} />
             </li>
-            <li onClick={() => {}}>
+            <li
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
               Sign In
               <FontAwesomeIcon icon={faArrowRight} />
             </li>
@@ -126,7 +149,7 @@ const Menu = () => {
           >
             <FontAwesomeIcon icon={faArrowLeft} />
           </button>
-          <ShopMenu />
+          <ShopMenu setMenuVisible={shopVisible} />
         </>
       )}
     </>

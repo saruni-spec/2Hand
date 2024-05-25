@@ -4,7 +4,7 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "site": "nuriaa",
+    "site": "nuria",
     "public": "dist",
     "ignore": [
       "firebase.json",

@@ -1,0 +1,25 @@
+.image-preview{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    max-height: 50%;
+    
+    margin: 5%;
+}
+
+.image-preview img{
+    width:80%;
+    height: 90%;
+    max-height: 90%;
+    object-fit: contain;
+
+}
+.image-preview button{
+    height: 90%;
+    width: 15%;
+    padding-top: 40%;
+    padding-bottom: 40%;
+}
+.image-preview button:hover{
+    color: #A09F9D;
+}

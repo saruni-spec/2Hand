@@ -54,7 +54,7 @@ const Feed = () => {
   const navigate = useNavigate();
 
   const navigateToShop = (category: string) => {
-    navigate(`/shop/${category}`);
+    navigate(`/shop/type/${category}`);
   };
 
   return (

@@ -1,0 +1,119 @@
+.shop-display {
+    list-style-type: none;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 5%;
+    width:70%;
+}
+  
+  .shop-display li {
+    position: relative;
+    margin-bottom: 10px;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 2px solid #A09F9D;
+    padding: 2%;
+    
+  }
+  .shop-display li {
+    /* Existing styles */
+    grid-row-start: 1;  /* Starts from the first row */
+    grid-column-start: 1;  /* Starts from the first column */
+}
+
+  .shop-display li button:hover {
+    color: #A09F9D;
+    
+  }
+
+  .shop-display li img {
+    width: 90%;
+    height: 80%;
+    object-fit: contain;
+  }
+  .preview{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 60%;
+    margin-top: 4%;
+  }
+  .preview img{
+    padding: 2%;
+    margin: 1%;
+    width: 50%;
+    height: 50%;
+    object-fit: contain;
+  }
+
+  #preview-img{
+    width: 40%;
+    height: 40%;
+    max-width: 40%;
+    max-height: 70%;
+    
+  }
+
+ #data-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    height: 50%;
+  }
+  .close-preview{
+    position: fixed;
+    top:20%;
+    left:80%;
+  }
+  .close-preview:hover{
+    color: black;
+    border: 1px solid black;
+  }
+  @media screen and (max-width: 800px) {
+
+  .shop-display {
+   
+    display:flex;
+    flex-direction: column;
+    width: 90%;
+    max-width: 100%;
+    justify-content: center;
+  }
+  
+  .shop-display li {
+    margin: 3px;
+    margin-bottom: 1%;
+    padding: 1%;
+    
+    width: 800%;
+    height: 30vh;
+  
+    
+  }
+  
+  
+  .shop-display li img {
+   
+    width: 90%;
+    height: 60%;
+    object-fit: contain;
+  }
+  .preview{
+   
+    flex-direction: column;
+  
+    width: 80%;
+    height: 80vh;
+    margin-top: 4%;
+  }
+  
+  
+
+  
+  }
