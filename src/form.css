@@ -122,6 +122,15 @@
   top: 40%;
   left: 45%;
 }
+.select{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  width: 100%;
+
+}
 
 @keyframes spin {
   0% { transform: rotate(0deg); }
@@ -132,6 +141,12 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+#color{
+  width: 10%;
+  padding: 2%;
+  height: 10vh;
+  border: none;
 }
 
  @media screen and (max-width: 800px) {

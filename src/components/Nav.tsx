@@ -2,11 +2,15 @@ import "../nav.css";
 import Menu from "./menu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { Helmet } from "react-helmet-async";
+import { useNavigate } from "react-router-dom";
 
 const Nav = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="nav">
-      <head>
+      <Helmet>
         <script
           src="https://apis.google.com/js/platform.js"
           async
@@ -16,10 +20,10 @@ const Nav = () => {
           name="google-signin-client_id"
           content="383391503149-i3jmo56tbfiss1t923g1icnghdgses1g.apps.googleusercontent.com.apps.googleusercontent.com"
         ></meta>
-      </head>
+      </Helmet>
       <div className="top-bar">
         <Menu />
-        <h3>Nuriaa</h3>
+        <h3 onClick={() => navigate("/")}>Nuriaa</h3>
 
         <a href="/login" id="a">
           Sign In

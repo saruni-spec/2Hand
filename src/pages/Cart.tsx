@@ -58,28 +58,52 @@ const Cart = () => {
     setCart(newCart);
   };
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        fetchCartData();
-      } else {
-        setCart([]);
-      }
-    });
+  const [loading, setLoading] = useState(true);
 
-    // Cleanup function to unsubscribe from the listener when the component unmounts
-    return () => unsubscribe();
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      const unsubscribe = auth.onAuthStateChanged((user) => {
+        if (user) {
+          console.log(user, "use cart 1");
+          fetchCartData();
+          console.log(user, "use cart 2");
+        } else {
+          setCart([]);
+        }
+      });
+
+      setLoading(false);
+      // Cleanup function to unsubscribe from the listener when the component unmounts
+      return () => unsubscribe();
+    }, 1500);
+
+    return () => clearTimeout(timeoutId);
   }, []);
+
   const clearCart = () => {
     setCart([]);
+  };
+
+  const removeItem = (sample: {
+    image: string;
+    price: number;
+    quantity: number;
+    label: string;
+    category: string;
+    size: string;
+    user: string;
+  }) => {
+    const newCart = cart.filter((item) => item !== sample);
+    setCart(newCart);
   };
 
   return (
     <>
       <Nav />
       <div className="homeDiv">
-        {cart.length === 0 && <p>Cart is empty</p>}
-        {cart.length > 0 && (
+        {loading && <div className="loader"></div>}
+        {!loading && cart.length === 0 && <p>Cart is empty</p>}
+        {!loading && cart.length > 0 && (
           <div className="duo">
             <ul className="cart">
               {cart.map((sample) => (
@@ -91,6 +115,12 @@ const Cart = () => {
                   <p>No of items({sample.quantity}),</p>
                   <p>{sample.label},</p>
                   <p>{sample.category}</p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      removeItem(sample);
+                    }}
+                  ></button>
                 </li>
               ))}
             </ul>

@@ -1,5 +1,7 @@
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 
 const About = () => {
   return (
@@ -54,6 +56,13 @@ const About = () => {
               Have questions or feedback? We'd love to hear from you! Feel free
               to <a href="/contact">contact us</a> with any inquiries or
               comments. Your satisfaction is our top priority.
+              <br />
+              <a href="/terms">
+                {" "}
+                Click here to view our Terms of Service
+                <FontAwesomeIcon icon={faExclamationCircle} />
+              </a>
+              .
             </p>
           </section>
         </main>

@@ -11,6 +11,8 @@ import {
   faRightToBracket,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
+import GoogleSignInButton from "../components/GoogleSignIn";
+import "../google-button.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -71,27 +73,27 @@ const Login = () => {
             type="email"
             placeholder="Enter Email"
             name="email"
+            required
           />
           <input
             className="form-input"
             type="password"
             placeholder="Enter Password"
             name="password"
+            required
           />
-          <button type="submit" className="login-button">
-            <p>
-              Login <FontAwesomeIcon icon={faRightToBracket} />
-            </p>
+          <button type="submit" className="google-button">
+            Login <FontAwesomeIcon icon={faRightToBracket} />
           </button>
           <button
             type="button"
             onClick={() => handleSignUp()}
-            className="login-button"
+            className="google-button"
           >
-            <p>
-              Sign up <FontAwesomeIcon icon={faUserPlus} />
-            </p>
+            Sign up <FontAwesomeIcon icon={faUserPlus} />
           </button>
+
+          <GoogleSignInButton />
         </form>
 
         <div

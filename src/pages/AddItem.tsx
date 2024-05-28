@@ -34,8 +34,10 @@ const AddItem = () => {
       if (!user) {
         navigate(`/login`, { state: { from: "add-item" } });
       }
+      console.log(user, "use cart");
       setIsLoading(false); // Set loading to false after check
-    }, 1000); // Delay by 1 second
+      console.log(user, "use cart");
+    }, 1500); // Delay by 1 second
 
     return () => clearTimeout(timeoutId); // Clear timeout on cleanup
   }, []);
@@ -104,7 +106,7 @@ const AddItem = () => {
           quantity: item.quantity,
           size: item.size,
           color: item.color,
-          user: user.uid,
+          seller: user.uid,
         });
         console.log("Document written with ID: ", docRef.id);
         setConfirm(false);
@@ -116,13 +118,13 @@ const AddItem = () => {
     }
   };
 
-  const [itemType, setItemType] = useState("");
+  const [itemType, setItemType] = useState("Type");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [category, setCategory] = useState("");
-  const [label, setLabel] = useState("");
-  const [quantity, setQuantity] = useState("");
-  const [size, setSize] = useState("");
+  const [category, setCategory] = useState("Category");
+  const [label, setLabel] = useState("none");
+  const [quantity, setQuantity] = useState("1");
+  const [size, setSize] = useState("Size");
   const [color, setColor] = useState("");
 
   const [imageList, setImageList] = useState<string[]>([]);
@@ -135,24 +137,40 @@ const AddItem = () => {
           <div className="loader"></div> // Display loading indicator while fetching user
         ) : !confirm ? (
           <form className="uniform-form" onSubmit={AddUniform}>
-            <label>Type</label>
-            <input
-              type="text"
-              placeholder="Enter Item Type"
-              defaultValue={itemType}
-              onChange={(e) => setItemType(e.target.value)}
-            />
+            <div className="select">
+              <label>Item Type : {itemType}</label>
+              <select
+                title="itemType"
+                required
+                defaultValue={itemType}
+                onChange={(e) => setItemType(e.target.value)}
+              >
+                <option value="">Select Item Type</option>
+                <option value="shirt">Shirt</option>
+                <option value="sweater">Sweater</option>
+                <option value="tie">Tie</option>
+                <option value="shorts">Shorts</option>
+                <option value="pants">Pants</option>
+                <option value="trackSuit">Track Suit</option>
+                <option value="socks">Socks</option>
+                <option value="shoes">Shoes</option>
+                <option value="sports">Sports</option>
+                <option value="tshirt">T-Shirt</option>
+              </select>
+            </div>
             <label>Description</label>
             <input
               type="text"
               defaultValue={description}
               placeholder="Enter Item Description"
               onChange={(e) => setDescription(e.target.value)}
+              required
             />
 
             <label>Images</label>
             <div id="image-input">
               <input
+                required
                 type="file"
                 placeholder="upload image"
                 onChange={(e) => {
@@ -197,18 +215,29 @@ const AddItem = () => {
               placeholder="Enter Item Price"
               onChange={(e) => setPrice(e.target.value)}
             />
-            <label>Category</label>
-            <input
-              type="text"
-              defaultValue={category}
-              placeholder="Enter Item Category"
-              onChange={(e) => setCategory(e.target.value)}
-            />
+            <div className="select">
+              <label>Category : {category}</label>
+
+              <select
+                title="category"
+                required
+                defaultValue={category}
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                <option value="">Select Item Category</option>
+                <option value="kindergarten">Kindergarten</option>
+                <option value="lowerSchool">Lower School</option>
+                <option value="middleSchool">Middle School</option>
+                <option value="juniorHigh">Junior High</option>
+                <option value="seniorHigh">Senior High</option>
+                <option value="college">College</option>
+              </select>
+            </div>
             <label>Label</label>
             <input
               type="text"
               defaultValue={label}
-              placeholder="Enter School label if present"
+              placeholder="Enter School if label present"
               onChange={(e) => setLabel(e.target.value)}
             />
             <label>Quantity</label>
@@ -218,16 +247,27 @@ const AddItem = () => {
               placeholder="Enter Item Quantity"
               onChange={(e) => setQuantity(e.target.value)}
             />
-            <label>Size</label>
-            <input
-              type="text"
-              defaultValue={size}
-              placeholder="Enter Item Size"
-              onChange={(e) => setSize(e.target.value)}
-            />
+            <div className="select">
+              <label>Size : {size}</label>
+              <select
+                title="size"
+                required
+                defaultValue={size}
+                onChange={(e) => setSize(e.target.value)}
+              >
+                <option value="">Select Item Size</option>
+                <option value="very small">Very Small</option>
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="large">Large</option>
+                <option value="very large">Very Large</option>
+              </select>
+            </div>
             <label>Color</label>
             <input
-              type="text"
+              required
+              id="color"
+              type="color"
               defaultValue={color}
               placeholder="Enter Item Color"
               onChange={(e) => setColor(e.target.value)}

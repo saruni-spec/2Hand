@@ -12,6 +12,9 @@ import black from "../assets/images/black.avif";
 import Footer from "../components/Footer";
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons/faUserPlus";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import GoogleSignInButton from "../components/GoogleSignIn";
+import "../google-button.css";
+import { useState } from "react";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -73,44 +76,65 @@ const SignUp = () => {
       navigate("/");
     }
   };
+
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+
+  const passwordMatch = () => {
+    if (password === confirmPassword) {
+      return true;
+    }
+    return false;
+  };
   return (
     <>
       <Nav />
-      <div className="formDiv">
-        <form className="login" onSubmit={handleSubmit}>
-          <input
-            className="form-input"
-            type="email"
-            placeholder="Enter Email"
-            name="email"
-          />
-          <input
-            className="form-input"
-            type="password"
-            placeholder="Enter Password"
-            name="password"
-          />
-          <input
-            className="form-input"
-            type="password"
-            placeholder="Confirm Password"
-          />
+      <div className="homeDiv">
+        <div className="formDiv">
+          <form className="login" onSubmit={handleSubmit}>
+            <input
+              className="form-input"
+              type="email"
+              placeholder="Enter Email"
+              name="email"
+              required
+            />
+            <input
+              className="form-input"
+              type="password"
+              placeholder="Enter Password"
+              name="password"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <input
+              className="confirm-input"
+              type="password"
+              placeholder="Confirm Password"
+              name="confirmPassword"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+            {passwordMatch() ? (
+              null && confirmPassword !== ""
+            ) : (
+              <p className="password">Passwords do not match</p>
+            )}
 
-          <button type="submit">
-            {" "}
-            <p>
-              Sign up <FontAwesomeIcon icon={faUserPlus} />
-            </p>
-          </button>
-        </form>
+            <button type="submit" className="google-button">
+              Sign-up <FontAwesomeIcon icon={faUserPlus} />
+            </button>
+            <GoogleSignInButton />
+          </form>
 
-        <div
-          style={{
-            backgroundImage: `url(${black})`,
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-          }}
-        ></div>
+          <div
+            style={{
+              backgroundImage: `url(${black})`,
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "cover",
+            }}
+          ></div>
+        </div>
       </div>
       <Footer />
     </>

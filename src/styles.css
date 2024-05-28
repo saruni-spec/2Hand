@@ -5,7 +5,7 @@
     justify-content: center;
     align-items: center;
    width: 100%;
-    height: 60vh;
+    height: 80vh;
 }
 .socials{
     display: flex;
@@ -43,7 +43,14 @@
     border: 1px solid rgb(82, 82, 82);
     margin: 5px;
     padding: 15px;
-    height: 60vh;
+    height: 80vh;
+    background-repeat: no-repeat;
+    background-size: 800px;
+    display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+
 }
 .fullDiv{
     border: 1px solid #F0E68C;
@@ -52,7 +59,7 @@
     justify-content: center;
     align-items: center;
     padding: 10px;
-    height: 60vh;
+    height: 80vh;
     width: 100%;
 }
 .displayList {
@@ -92,6 +99,7 @@
     display: flex;
 flex-direction: column;
 justify-content: center;
+align-items: center;
 }
 
 .dual{
@@ -111,13 +119,17 @@ justify-content: center;
 .visible{
   color: #A09F9D;
 }
-p{
-  
-
-  color: #F0E68C;
-
+.nav-p{
+  border: 2px solid #F0E68C;
+  transition: background-color 0.5s ease-in-out,font-weight 0.5s ease-in-out;
 }
-
+.nav-p:hover{
+  cursor: pointer;
+  font-weight: 600;
+  background-color:#A09F9D ;
+  color: #F0E68C;
+  
+}
 
 @media screen and (max-width: 800px) {
 
@@ -137,13 +149,15 @@ p{
 }
 
 .grid {
-  display: none;
+  display: flex;
   flex-direction: column;
   width: 100%;
   
 }
 .grid div{
   height: 30vh;
+  background-repeat: no-repeat;
+  background-size: 400px;
 }
 
 .fullDiv{
@@ -201,16 +215,21 @@ p{
   left:5%;
   width: 90%;
   height: 80%;
-  object-fit: contain;
+ 
 }
 
 
 .ImageDiv{
   background-repeat: no-repeat;
-  background-size: auto;
+
+  background-size:400px;
   display: flex;
 flex-direction: column;
 justify-content: center;
+}
+.fullDiv{
+  background-repeat: no-repeat;
+  background-size:400px;
 }
 
 }

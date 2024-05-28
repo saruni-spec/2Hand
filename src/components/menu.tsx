@@ -3,8 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
   faTimesCircle,
-  faArrowRight,
   faArrowLeft,
+  faUser,
+  faSignIn,
+  faMessage,
+  faShop,
+  faQuestion,
+  faSearchDollar,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faSquareFacebook,
@@ -79,7 +84,7 @@ const Menu = () => {
                 toggleFilterVisible();
               }}
             >
-              Shop <FontAwesomeIcon icon={faArrowRight} />
+              Shop <FontAwesomeIcon icon={faShop} />
             </li>
             <li
               onClick={() => {
@@ -87,21 +92,28 @@ const Menu = () => {
               }}
             >
               About
-              <FontAwesomeIcon icon={faArrowRight} />
+              <FontAwesomeIcon icon={faQuestion} />
             </li>
             <li
               onClick={() => {
                 navigate("/add-item");
               }}
             >
-              Sell <FontAwesomeIcon icon={faArrowRight} />
+              Sell <FontAwesomeIcon icon={faSearchDollar} />
             </li>
             <li
               onClick={() => {
                 navigate("/contact");
               }}
             >
-              Contact Us <FontAwesomeIcon icon={faArrowRight} />
+              Contact Us <FontAwesomeIcon icon={faMessage} />
+            </li>
+            <li
+              onClick={() => {
+                navigate("/profile");
+              }}
+            >
+              Profile <FontAwesomeIcon icon={faUser} />
             </li>
             <li
               onClick={() => {
@@ -109,7 +121,7 @@ const Menu = () => {
               }}
             >
               Sign In
-              <FontAwesomeIcon icon={faArrowRight} />
+              <FontAwesomeIcon icon={faSignIn} />
             </li>
             <li>
               <a href="facebook.com">

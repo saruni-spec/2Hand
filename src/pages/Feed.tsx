@@ -61,14 +61,15 @@ const Feed = () => {
     <>
       <Nav />
       <div className="homeDiv">
-        <div
-          style={{ backgroundImage: `url(${uniform})` }}
-          className="fullDiv"
-          onClick={() => {
-            navigateToShop("");
-          }}
-        >
-          <p>Shop Now</p>
+        <div style={{ backgroundImage: `url(${uniform})` }} className="fullDiv">
+          <p
+            className="nav-p"
+            onClick={() => {
+              navigateToShop("");
+            }}
+          >
+            Shop Now
+          </p>
         </div>
         <div className="fullDiv">
           <p className="visible">
@@ -86,13 +87,18 @@ const Feed = () => {
             style={{
               backgroundColor: "#f0f0f0",
             }}
-            onClick={() => {
-              navigateToShop("female");
-            }}
           >
-            <p>female</p>
+            <p
+              className="nav-p"
+              onClick={() => {
+                navigateToShop("female");
+              }}
+            >
+              female
+            </p>
           </div>
           <div
+            className="ImageDiv"
             ref={(el) => (imageRefs.current[1] = el)} // Store ref in array
             data-src={uniform4}
             style={{
@@ -100,11 +106,15 @@ const Feed = () => {
               backgroundImage:
                 'url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==")',
             }} // Placeholder
-            onClick={() => {
-              navigateToShop("male");
-            }}
           >
-            <p>male</p>
+            <p
+              className="nav-p"
+              onClick={() => {
+                navigateToShop("male");
+              }}
+            >
+              male
+            </p>
           </div>
         </div>
 
@@ -117,11 +127,15 @@ const Feed = () => {
               backgroundImage:
                 'url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==")',
             }} // Placeholder
-            onClick={() => {
-              navigateToShop("sweater");
-            }}
           >
-            <p>sweaters</p>
+            <p
+              className="nav-p"
+              onClick={() => {
+                navigateToShop("sweater");
+              }}
+            >
+              sweaters
+            </p>
           </div>
           <div
             ref={(el) => (imageRefs.current[3] = el)} // Store ref in array
@@ -131,11 +145,15 @@ const Feed = () => {
               backgroundImage:
                 'url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==")',
             }}
-            onClick={() => {
-              navigateToShop("shirt");
-            }}
           >
-            <p>shirts</p>
+            <p
+              className="nav-p"
+              onClick={() => {
+                navigateToShop("shirt");
+              }}
+            >
+              shirts
+            </p>
           </div>
           <div
             ref={(el) => (imageRefs.current[4] = el)} // Store ref in array
@@ -145,11 +163,15 @@ const Feed = () => {
               backgroundImage:
                 'url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==")',
             }}
-            onClick={() => {
-              navigateToShop("pants");
-            }}
           >
-            <p>pants</p>
+            <p
+              className="nav-p"
+              onClick={() => {
+                navigateToShop("pants");
+              }}
+            >
+              pants
+            </p>
           </div>
           <div
             ref={(el) => (imageRefs.current[5] = el)} // Store ref in array
@@ -159,11 +181,15 @@ const Feed = () => {
               backgroundImage:
                 'url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==")',
             }}
-            onClick={() => {
-              navigateToShop("shorts");
-            }}
           >
-            <p>shorts</p>
+            <p
+              className="nav-p"
+              onClick={() => {
+                navigateToShop("shorts");
+              }}
+            >
+              shorts
+            </p>
           </div>
           <div
             ref={(el) => (imageRefs.current[6] = el)} // Store ref in array
@@ -174,11 +200,15 @@ const Feed = () => {
                 'url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==")',
             }}
             className="ImageDiv"
-            onClick={() => {
-              navigateToShop("skirt");
-            }}
           >
-            <p>skirts</p>
+            <p
+              className="nav-p"
+              onClick={() => {
+                navigateToShop("skirt");
+              }}
+            >
+              skirts
+            </p>
           </div>
           <div
             ref={(el) => (imageRefs.current[7] = el)} // Store ref in array
@@ -188,11 +218,15 @@ const Feed = () => {
               backgroundImage:
                 'url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==")',
             }}
-            onClick={() => {
-              navigateToShop("dress");
-            }}
           >
-            <p>dresses</p>
+            <p
+              className="nav-p"
+              onClick={() => {
+                navigateToShop("dress");
+              }}
+            >
+              dresses
+            </p>
           </div>
         </div>
 
@@ -206,11 +240,15 @@ const Feed = () => {
               backgroundImage:
                 'url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==")',
             }}
-            onClick={() => {
-              navigateToShop("sports");
-            }}
           >
-            <p>sports wear</p>
+            <p
+              className="nav-p"
+              onClick={() => {
+                navigateToShop("sports");
+              }}
+            >
+              sports wear
+            </p>
           </div>
         </div>
 
@@ -224,11 +262,15 @@ const Feed = () => {
               backgroundImage:
                 'url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==")',
             }}
-            onClick={() => {
-              navigateToShop("shoes");
-            }}
           >
-            <p>shoes</p>
+            <p
+              className="nav-p"
+              onClick={() => {
+                navigateToShop("shoes");
+              }}
+            >
+              shoes
+            </p>
           </div>
         </div>
 

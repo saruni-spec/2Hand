@@ -34,6 +34,7 @@ type UniformType = {
   label: string;
   size: string;
   description: string;
+  seller: string;
 };
 
 const Shop = () => {
@@ -53,6 +54,7 @@ const Shop = () => {
       type: string;
       color: string;
       description: string;
+      seller: string;
     }[]
   >([]);
 
@@ -81,6 +83,7 @@ const Shop = () => {
       type: string;
       color: string;
       description: string;
+      seller: string;
     }[] = [];
 
     querySnapshot.forEach((doc) => {
@@ -97,6 +100,7 @@ const Shop = () => {
         color: doc.data().color,
         id: doc.id,
         description: doc.data().description,
+        seller: doc.data().seller,
       };
       newUniform.push(entry);
     });
@@ -124,14 +128,18 @@ const Shop = () => {
     let user_temp: string | null | undefined;
     console.log(user?.email, "user is here");
     console.log(uniform, "uniform is here");
-    if (user) {
-      user_temp = user.email;
-    } else {
-      SignUpLogin("guest" + noGenerator() + "@gmail.com", "password");
+    if (!user) {
+      SignUpLogin("guest" + noGenerator() + "@gmail.com", "user");
       user = auth.currentUser;
       auth.onAuthStateChanged((user) => {
         user_temp = user?.email;
       });
+    }
+    user_temp = user?.email;
+
+    if (user && user.uid === uniform.seller) {
+      alert("You can't buy your own item");
+      return;
     }
 
     try {
@@ -146,6 +154,7 @@ const Shop = () => {
         type: uniform.type,
         color: uniform.color,
         description: uniform.description,
+        seller: uniform.seller,
       });
 
       navigate("/cart");
