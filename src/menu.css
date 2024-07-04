@@ -1,141 +1,141 @@
 .menu{
     
-    transition: opacity 5s ease, transform 5s ease;
-  opacity: 0;
-  transform: translateX(-100%);
+  transition: opacity 5s ease, transform 5s ease;
+opacity: 0;
+transform: translateX(-100%);
 }
 .menuButton{
-    position: fixed;
-    left: 0;
-    top: 10px;
-    margin: 0.5%;
-    padding: 0.5%;
-    cursor: pointer;
-    z-index: 100;
+  position: fixed;
+  left: 0;
+  top: 10px;
+  margin: 0.5%;
+  padding: 0.5%;
+  cursor: pointer;
+  z-index: 100;
 }
 
 .menu.visible{
-    position: fixed;
-    left: 0;
-    top:0;
-    margin: 0;
-    width: 25%;
-    list-style-type: none;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    background-color: #F0E68C;
-    padding: 2%;
-    opacity: 1;
-  transform: translateX(0);
-  z-index: 102;
+  position: fixed;
+  left: 0;
+  top:0;
+  margin: 0;
+  width: 25%;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #F0E68C;
+  padding: 2%;
+  opacity: 1;
+transform: translateX(0);
+z-index: 102;
 }
 .menu li{
-    display: flex;
-    flex-direction: row;
-    padding: 1.5%;
-    margin: 1.5%;
-    align-items: center;
-    justify-content: space-between;
-    color: black;
+  display: flex;
+  flex-direction: row;
+  padding: 1.5%;
+  margin: 1.5%;
+  align-items: center;
+  justify-content: space-between;
+  color: black;
 }
 .menu li:last-child{
-  margin-top: 70%;
-  margin-left: 3%;
+margin-top: 70%;
+margin-left: 3%;
 }
 .menu li:hover {
-  cursor: pointer;
-    background-color: #A09F9D;
+cursor: pointer;
+  background-color: #A09F9D;
 }
 .menu li:last-child:hover{
-  background-color:transparent ;
+background-color:transparent ;
 }
 
 
 
 
 .closeMenu{
-    position: fixed;
-    left: 25%;
-    top: 0;
-    margin: 2%;
-    cursor: pointer;
-    padding: 0;
+  position: fixed;
+  left: 25%;
+  top: 0;
+  margin: 2%;
+  cursor: pointer;
+  padding: 0;
 
 }
 .closeMenu img{
-    width: 20px;
-    height: 20px;
+  width: 20px;
+  height: 20px;
 }
 
 .back-menu{
-  position: fixed;
-  left: 0;
-  top: 1px;
-  padding: 0;
-  margin: 2%;
-  cursor: pointer;
-  z-index: 10000;
+position: fixed;
+left: 0;
+top: 1px;
+padding: 0;
+margin: 2%;
+cursor: pointer;
+z-index: 10000;
 }
 
 
 @media screen and (max-width: 800px) {
-    .menu {
-        transition: opacity 1s ease, transform 1s ease;
-        opacity: 0;
-        transform: translateX(-100%);
-        position: relative;
-    }
-    .menuButton{
-        position: fixed;
-        left: 0;
-        top: 2%;
-        margin: 0.5%;
-        padding: 0.5%;
-        cursor: pointer;
-        z-index: 100;
-    }
-  
-    .menu.visible {
-        position: fixed;
-        left: 0;
-        top:0;
-        width: 90%;
-        list-style-type: none;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        background-color: #F0E68C;
-        justify-content: space-evenly;
-        padding: 2%;
-        opacity: 1;
-      transform: translateX(0);
-      z-index: 1000;
-    }
-  
-    .menu li {
+  .menu {
+      transition: opacity 1s ease, transform 1s ease;
+      opacity: 0;
+      transform: translateX(-100%);
+      position: relative;
+  }
+  .menuButton{
+      position: fixed;
+      left: 0;
+      top: 2%;
+      margin: 0.5%;
+      padding: 0.5%;
+      cursor: pointer;
+      z-index: 100;
+  }
+
+  .menu.visible {
+      position: fixed;
+      left: 0;
+      top:0;
+      width: 90%;
+      list-style-type: none;
       display: flex;
-      flex-direction: row;
-      padding: 10px;
-      margin: 10px;
-      border: none;
-      border-bottom: 1px solid #A09F9D;
-      border-radius: 0;
-      align-items: center;
-    justify-content: space-between;
-    }
-    .menu li:last-child{
-      margin-top: 70%;
-    }
+      flex-direction: column;
+      height: 100%;
+      background-color: #F0E68C;
+      justify-content: space-evenly;
+      padding: 2%;
+      opacity: 1;
+    transform: translateX(0);
+    z-index: 1000;
+  }
+
+  .menu li {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    border-bottom: 1px solid #A09F9D;
+    border-radius: 0;
+    align-items: center;
+  justify-content: space-between;
+  }
+  .menu li:last-child{
+    margin-top: 70%;
+  }
+
+ 
+ 
+  .closeMenu{
+      position: fixed;
+      left: 80%;
+      top: 1%;
+      cursor: pointer;
+      z-index: 10000;
   
-   
-   
-    .closeMenu{
-        position: fixed;
-        left: 80%;
-        top: 1%;
-        cursor: pointer;
-        z-index: 10000;
-    
-    }
+  }
 }

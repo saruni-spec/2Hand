@@ -65,6 +65,7 @@ const Menu = () => {
         }}
         className="menuButton"
       >
+        <p>Menu</p>
         <FontAwesomeIcon icon={faBars} />
       </button>
       {menuVisible && (
@@ -76,6 +77,7 @@ const Menu = () => {
               setMenuVisible(false);
             }}
           >
+            <p>Close Menu</p>
             <FontAwesomeIcon icon={faTimesCircle} className="icon" />
           </button>
           <ul className={`menu ${menuVisible ? "visible" : ""}`} ref={menuRef}>
@@ -150,6 +152,7 @@ const Menu = () => {
               setFilterVisible(false);
             }}
           >
+            <p>Close Menu</p>
             <FontAwesomeIcon icon={faTimesCircle} className="icon" />
           </button>
           <button
@@ -159,6 +162,7 @@ const Menu = () => {
               toggleFilterVisible();
             }}
           >
+            <p>Back</p>
             <FontAwesomeIcon icon={faArrowLeft} />
           </button>
           <ShopMenu setMenuVisible={shopVisible} />

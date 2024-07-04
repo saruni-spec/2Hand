@@ -1,240 +1,240 @@
 .uniform-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem;
-    
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    width: 50%;
-    margin-left: 25%;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
   
-  .uniform-form label {
-    font-weight: bold;
-    margin-top: 1rem;
-    align-self: flex-start;
-   
-  }
-  
-  .uniform-form input {
-    width: 100%;
-    padding: 0.8rem;
-    
-    font-size: 1rem;
-   
-    
-  
-  }
-  
-  .uniform-form input[type="file"] {
-    border: none;
-    padding: 0;
-  }
-  
-  .uniform-form button {
-    margin-top: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 50%;
+  margin-left: 25%;
+}
 
-    padding: 0.8rem 1.5rem;
+.uniform-form label {
+  font-weight: bold;
+  margin-top: 1rem;
+  align-self: flex-start;
+ 
+}
+
+.uniform-form input {
+  width: 100%;
+  padding: 0.8rem;
   
-  }
+  font-size: 1rem;
+ 
   
 
- .uniform-form img{
-  margin: 3%;
-  width: 80%;
-  height: max-content;
- }
+}
 
-  
-  .confirm {
-    display: flex;
-    flex-direction: row;
-    justify-content:center;
-    align-items: center;
-    
-    padding: 2rem;
-    
-   height: 100vh;
-    margin: 10;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+.uniform-form input[type="file"] {
+  border: none;
+  padding: 0;
+}
 
-    border-radius: 8px;
-    
-  }
-  .row1{
-    width: 40%;
-    max-width: 40vw;
-    max-height: 60vh;
-    height: 80%;
-    margin: 5%;
-    border: 2px solid black;
+.uniform-form button {
+  margin-top: 1.5rem;
 
-  }
-  .row2{
-    width: 40%;
-    height: 80%;
-    display:flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
-  }
-  .row2buttons{
-    display: flex;
-    flex-direction: row;
-    align-content: center;
-    justify-content: space-evenly;
-  }
-  .row2 ul{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    
-    padding: 2rem;
-    list-style-type: none;
-    margin: 10;
-    
-  }
+  padding: 0.8rem 1.5rem;
+
+}
+
+
+.uniform-form img{
+margin: 3%;
+width: 80%;
+height: max-content;
+}
+
+
+.confirm {
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
+  align-items: center;
   
-  .confirm ul li {
-    margin-bottom: 0.5rem;
-    font-size: 1.1rem;
-  }
+  padding: 2rem;
   
+ height: 100vh;
+  margin: 10;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+
+  border-radius: 8px;
+  
+}
+.row1{
+  width: 40%;
+  max-width: 40vw;
+  max-height: 60vh;
+  height: 80%;
+  margin: 5%;
+  border: 2px solid black;
+
+}
+.row2{
+  width: 40%;
+  height: 80%;
+  display:flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+.row2buttons{
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-evenly;
+}
+.row2 ul{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  
+  padding: 2rem;
+  list-style-type: none;
+  margin: 10;
+  
+}
+
+.confirm ul li {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
 
 
 .confirm div button{
-  margin: 4%;
+margin: 4%;
 }
 
 .row1 img{
-  margin: 5%;
-  width: 100%;
-  height: 100%;
- }
- .loader {
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid #F0E68C;
-  width: 120px;
-  height: 120px;
-  animation: spin 2s linear infinite;
-  position: fixed;
-  top: 40%;
-  left: 45%;
+margin: 5%;
+width: 100%;
+height: 100%;
+}
+.loader {
+border: 16px solid #f3f3f3;
+border-radius: 50%;
+border-top: 16px solid #F0E68C;
+width: 120px;
+height: 120px;
+animation: spin 2s linear infinite;
+position: fixed;
+top: 40%;
+left: 45%;
 }
 .select{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 3%;
-  margin-bottom: 3%;
-  width: 100%;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+margin-top: 3%;
+margin-bottom: 3%;
+width: 100%;
 
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
 }
 
 #image-input{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+display: flex;
+flex-direction: row;
+justify-content: center;
 }
 #color{
-  width: 10%;
-  padding: 2%;
-  height: 10vh;
-  border: none;
+width: 10%;
+padding: 2%;
+height: 10vh;
+border: none;
 }
 
- @media screen and (max-width: 800px) {
-  .uniform-form {
-    width: 90%;
-    margin-left: 5%;
-   
-  }
-  
-  .uniform-form label {
-    font-weight: bold;
-    margin-top: 1rem;
-    align-self: flex-start;
-  }
-  
-  
-  .uniform-form input[type="file"] {
-    border: none;
-    padding: 0;
-  }
-  
- 
-  
- .uniform-form img{
-  margin: 3%;
-  width: 80%;
-  height: max-content;
- }
- .confirm {
-  display: flex;
-  flex-direction:column;
+@media screen and (max-width: 800px) {
+.uniform-form {
   width: 90%;
-  padding: 2rem;
   margin-left: 5%;
-  
  
- 
-  
 }
 
-  
-  .row1{
-    width: 90%;
-    max-width: 90vw;
-    height: 40%;
-    max-height: 40vh;
-    margin: 5%;
-    margin-top: 0;
-  }
-  .row2{
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
-  }
-  .row2 ul{
-    display:flex;
-    flex-direction: column;
-    width: 90%;
+.uniform-form label {
+  font-weight: bold;
+  margin-top: 1rem;
+  align-self: flex-start;
+}
 
-  }
-  
-  .row2 ul li p{
-    font-size: 0.8rem;
-  }
-  .row2 div{
-    display: flex;
-    flex-direction: row;
-    align-content: center;
-    justify-content: space-evenly;
-  }
-  
-  .confirm ul li {
-    margin-bottom: 0.5rem;
-    font-size: 1.1rem;
-  }
+
+.uniform-form input[type="file"] {
+  border: none;
+  padding: 0;
+}
+
+
+
+.uniform-form img{
+margin: 3%;
+width: 80%;
+height: max-content;
+}
+.confirm {
+display: flex;
+flex-direction:column;
+width: 90%;
+padding: 2rem;
+margin-left: 5%;
+
+
+
+
+}
+
+
+.row1{
+  width: 90%;
+  max-width: 90vw;
+  height: 40%;
+  max-height: 40vh;
+  margin: 5%;
+  margin-top: 0;
+}
+.row2{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+.row2 ul{
+  display:flex;
+  flex-direction: column;
+  width: 90%;
+
+}
+
+.row2 ul li p{
+  font-size: 0.8rem;
+}
+.row2 div{
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-evenly;
+}
+
+.confirm ul li {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
 
 
 .confirm div button{
-  margin: 4%;
+margin: 4%;
 }
 
 .row1 img{
-  margin: 2%;
-  width: 90%;
-  height: 90%;
- }
+margin: 2%;
+width: 90%;
+height: 90%;
+}
 
 
- }
+}

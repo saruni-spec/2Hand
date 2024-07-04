@@ -63,6 +63,7 @@ const Filter: React.FC<FilterProps> = ({ setFilter }) => {
       {isMobileDevice && (
         <button type="button" onClick={toggleFilter} className="filter-button">
           <FontAwesomeIcon icon={faFilter} />
+          <p>Fiters</p>
         </button>
       )}
 

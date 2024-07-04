@@ -210,6 +210,7 @@ const Profile = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
     console.log("submitting form");
     const user = auth.currentUser;
     if (user) {
@@ -233,23 +234,27 @@ const Profile = () => {
       );
 
       const storage = getStorage();
-      // Upload the image to Firebase Storage
-      // Get the download URL of the uploaded image
       const storageRef1 = ref(storage, `user-photos/${user.email}`);
-      await uploadBytes(storageRef1, photo);
-      const downloadURL1 = await getDownloadURL(storageRef1);
+      let downloadURL1 = await getDownloadURL(storageRef1);
+      if (photo) {
+        // Upload the image to Firebase Storage
+        // Get the download URL of the uploaded image
 
-      updateProfile(user, {
-        displayName: userName,
-        photoURL: downloadURL1,
-      })
-        .then(() => {
-          console.log("Profile updated");
+        await uploadBytes(storageRef1, photo);
+        downloadURL1 = await getDownloadURL(storageRef1);
+
+        updateProfile(user, {
+          displayName: userName,
+          photoURL: downloadURL1,
         })
-        .catch((error) => {
-          console.log(error);
-          // ...
-        });
+          .then(() => {
+            console.log("Profile updated");
+          })
+          .catch((error) => {
+            console.log(error);
+            // ...
+          });
+      }
 
       const userQuery = query(
         collection(db, "users"),
@@ -285,6 +290,7 @@ const Profile = () => {
               photoURL: downloadURL1,
             });
           }
+          setIsLoading(false);
         })
         .catch((error) => {
           console.log("Error updating profile", error);

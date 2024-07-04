@@ -44,11 +44,11 @@ const AddItem = () => {
 
   const AddUniform = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formElements = e.currentTarget
-      .elements as HTMLCollectionOf<HTMLInputElement>;
-    const file1 = formElements[2].files?.[0];
-    let file2 = formElements[3].files?.[0];
-    let file3 = formElements[4].files?.[0];
+
+    const form = e.currentTarget;
+    const file1 = form.image1.files?.[0];
+    let file2 = form.image2.files?.[0];
+    let file3 = form.image3.files?.[0];
 
     if (file1) {
       if (!file2) {
@@ -57,39 +57,41 @@ const AddItem = () => {
       if (!file3) {
         file3 = file1;
       }
+
       setItem({
-        clothType: formElements[0].value,
-        description: formElements[1].value,
+        clothType: form.clothType.value,
+        description: form.description.value,
         image: file1,
         image1: file2,
         image2: file3,
-        price: formElements[5].value,
-        category: formElements[6].value,
-        label: formElements[7].value,
-        quantity: formElements[8].value,
-        size: formElements[9].value,
-        color: formElements[10].value,
+        price: form.price.value,
+        category: form.category.value,
+        label: form.label.value,
+        quantity: form.quantity.value,
+        size: form.size.value,
+        color: form.color.value,
       });
       setConfirm(true);
     }
   };
 
   const postItem = async (item: ItemData) => {
+    setIsLoading(true); // Set loading to true
     const user = auth.currentUser;
     if (user) {
       try {
         const storage = getStorage();
         // Upload the image to Firebase Storage
         // Get the download URL of the uploaded image
-        const storageRef1 = ref(storage, `uniforms/${item.category}`);
+        const storageRef1 = ref(storage, `uniforms/${item.clothType}`);
         await uploadBytes(storageRef1, item.image);
         const downloadURL1 = await getDownloadURL(storageRef1);
 
-        const storageRef2 = ref(storage, `uniforms/${item.category}`);
+        const storageRef2 = ref(storage, `uniforms/${item.clothType}`);
         await uploadBytes(storageRef2, item.image);
         const downloadURL2 = await getDownloadURL(storageRef2);
 
-        const storageRef3 = ref(storage, `uniforms/${item.category}`);
+        const storageRef3 = ref(storage, `uniforms/${item.clothType}`);
         await uploadBytes(storageRef3, item.image);
         const downloadURL3 = await getDownloadURL(storageRef3);
 
@@ -112,6 +114,7 @@ const AddItem = () => {
         setConfirm(false);
         setItem(null);
         setImageList([]); // Clear the image preview
+        setIsLoading(false); // Set loading to false
       } catch (e) {
         console.error("Error adding document: ", e);
       }
@@ -138,9 +141,11 @@ const AddItem = () => {
         ) : !confirm ? (
           <form className="uniform-form" onSubmit={AddUniform}>
             <div className="select">
-              <label>Item Type : {itemType}</label>
+              <label>Cloth Type : {itemType}</label>
               <select
-                title="itemType"
+                name="clothType"
+                id="clothType"
+                title="Cloth Type"
                 required
                 defaultValue={itemType}
                 onChange={(e) => setItemType(e.target.value)}
@@ -161,6 +166,8 @@ const AddItem = () => {
             <label>Description</label>
             <input
               type="text"
+              name="description"
+              id="description"
               defaultValue={description}
               placeholder="Enter Item Description"
               onChange={(e) => setDescription(e.target.value)}
@@ -172,6 +179,8 @@ const AddItem = () => {
               <input
                 required
                 type="file"
+                name="image1"
+                id="image1"
                 placeholder="upload image"
                 onChange={(e) => {
                   const file1 = e.target.files?.[0];
@@ -184,6 +193,8 @@ const AddItem = () => {
 
               <input
                 type="file"
+                name="image2"
+                id="image2"
                 placeholder="upload image"
                 onChange={(e) => {
                   const file2 = e.target.files?.[0];
@@ -196,6 +207,8 @@ const AddItem = () => {
 
               <input
                 type="file"
+                name="image3"
+                id="image3"
                 placeholder="upload image"
                 onChange={(e) => {
                   const file3 = e.target.files?.[0];
@@ -211,6 +224,8 @@ const AddItem = () => {
             <label>Price</label>
             <input
               type="number"
+              name="price"
+              id="price"
               defaultValue={price}
               placeholder="Enter Item Price"
               onChange={(e) => setPrice(e.target.value)}
@@ -220,6 +235,8 @@ const AddItem = () => {
 
               <select
                 title="category"
+                name="category"
+                id="category"
                 required
                 defaultValue={category}
                 onChange={(e) => setCategory(e.target.value)}
@@ -236,6 +253,8 @@ const AddItem = () => {
             <label>Label</label>
             <input
               type="text"
+              name="label"
+              id="label"
               defaultValue={label}
               placeholder="Enter School if label present"
               onChange={(e) => setLabel(e.target.value)}
@@ -243,6 +262,8 @@ const AddItem = () => {
             <label>Quantity</label>
             <input
               type="number"
+              name="quantity"
+              id="quantity"
               defaultValue={quantity}
               placeholder="Enter Item Quantity"
               onChange={(e) => setQuantity(e.target.value)}
@@ -251,6 +272,8 @@ const AddItem = () => {
               <label>Size : {size}</label>
               <select
                 title="size"
+                name="size"
+                id="size"
                 required
                 defaultValue={size}
                 onChange={(e) => setSize(e.target.value)}
@@ -264,8 +287,11 @@ const AddItem = () => {
               </select>
             </div>
             <label>Color</label>
+            <p>Select Color</p>
             <input
               required
+              title="select color"
+              name="color"
               id="color"
               type="color"
               defaultValue={color}

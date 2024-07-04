@@ -7,6 +7,7 @@ const searchBar = () => {
       <div className="search-bar">
         <input type="text" placeholder="Search" />
         <button type="button" onClick={() => {}}>
+          <p>Search</p>
           <FontAwesomeIcon icon={faSearch} />
         </button>
       </div>

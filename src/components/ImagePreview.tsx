@@ -27,7 +27,7 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({ image }) => {
         onClick={handlePrevImage}
         disabled={image.length <= 1}
       >
-        <p style={{ display: "none" }}>Previous</p>
+        <p>Previous</p>
         <FontAwesomeIcon icon={faAngleLeft} />
       </button>
       {image[currentIndex] && <img src={image[currentIndex]} alt="Preview" />}
@@ -36,7 +36,7 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({ image }) => {
         onClick={handleNextImage}
         disabled={image.length <= 1}
       >
-        <p style={{ display: "none" }}>Next</p>
+        <p>Next</p>
         <FontAwesomeIcon icon={faAngleRight} />
       </button>
     </div>

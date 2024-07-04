@@ -54,7 +54,12 @@ const Feed = () => {
   const navigate = useNavigate();
 
   const navigateToShop = (category: string) => {
-    navigate(`/shop/type/${category}`);
+    console.log(category);
+    if (category === "all") {
+      navigate("/shop");
+    } else {
+      navigate(`/shop/type/${category}`);
+    }
   };
 
   return (
@@ -65,7 +70,7 @@ const Feed = () => {
           <p
             className="nav-p"
             onClick={() => {
-              navigateToShop("");
+              navigateToShop("all");
             }}
           >
             Shop Now

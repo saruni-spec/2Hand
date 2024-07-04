@@ -22,11 +22,19 @@ declare global {
   }
 }
 
-const IntaSendButton = ({ amount }: { amount: string }) => {
+const IntaSendButton = ({
+  amount,
+  phone,
+  email,
+}: {
+  amount: string;
+  phone: string;
+  email: string;
+}) => {
   // Destructure amount prop
   new window.IntaSend({
-    publicAPIKey: "ISPubKey_test_2ccf1b85-f000-4e4c-8b3e-5564d3e3fb8b",
-    live: false, //or true for live environment
+    publicAPIKey: "ISPubKey_live_2f2708f5-446a-4be2-a8ee-12ab537ee2c9",
+    live: true, //or true for live environment
   })
     .on("COMPLETE", (response: Response) => {
       console.log("COMPLETE:", response);
@@ -44,6 +52,8 @@ const IntaSendButton = ({ amount }: { amount: string }) => {
         className="intaSendPayButton"
         data-amount={amount} // Set data-amount directly on button
         data-currency="KES"
+        data-email={email}
+        data-phone_number={phone}
       >
         Pay Now
       </button>
