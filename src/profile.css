@@ -72,7 +72,9 @@
   }
 
   @media screen and (max-width: 767px){
-    
+    .section{
+     padding-top: 2rem;
+    }
     
     .myProfile{
         

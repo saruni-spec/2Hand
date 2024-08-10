@@ -1,18 +1,46 @@
 .footer{
     border: 1px solid #F0E68C;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     padding: 10px;
-    height: 60vh;
+   
     width: 100%;
     background-color: #F0E68C;
    
-   margin-bottom: 0;
-    color: #a5865c;
+  
+
+}
+.emailForm{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    color: black;
+}
+.emailForm button{
+    outline: 2px solid #A09F9D;
+}
+.emailForm div{
+    align-items: baseline;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+  
+}
+.footer-div{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    align-items:flex-start;
+    justify-content: flex-start;
+    text-align: left;
 }
 
+.footer-div p{
+    cursor: pointer;
+}
+.footer p{color: #A09F9D;}
 .socials a{
     margin: 10%;
     padding: 5px;
@@ -31,16 +59,23 @@
    @media screen and (max-width: 800px) {
 
   .footer{
-    border: 1px solid rgb(5, 5, 5);
-    display: flex;
+   
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    margin:3px;
-    padding: 10px;
-    height: 50vh;
+    align-items: flex-start;
+
     width: 100%;
   }
-  
+  .footer-div{
+    
+    width: 100%;
+   
+   
+}
+.emailForm{
+   
+    width: 100%;
+}
+
   
   }

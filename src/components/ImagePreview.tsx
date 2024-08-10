@@ -19,26 +19,27 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({ image }) => {
     );
   };
 
-  console.log(image, "image list");
   return (
     <div className="image-preview">
-      <button
-        type="button"
-        onClick={handlePrevImage}
-        disabled={image.length <= 1}
-      >
-        <p>Previous</p>
-        <FontAwesomeIcon icon={faAngleLeft} />
-      </button>
       {image[currentIndex] && <img src={image[currentIndex]} alt="Preview" />}
-      <button
-        type="button"
-        onClick={handleNextImage}
-        disabled={image.length <= 1}
-      >
-        <p>Next</p>
-        <FontAwesomeIcon icon={faAngleRight} />
-      </button>
+      <div className="buttonGroup">
+        <button
+          type="button"
+          onClick={handlePrevImage}
+          disabled={image.length <= 1}
+        >
+          <p>Previous</p>
+          <FontAwesomeIcon icon={faAngleLeft} />
+        </button>
+        <button
+          type="button"
+          onClick={handleNextImage}
+          disabled={image.length <= 1}
+        >
+          <p>Next</p>
+          <FontAwesomeIcon icon={faAngleRight} />
+        </button>
+      </div>
     </div>
   );
 };

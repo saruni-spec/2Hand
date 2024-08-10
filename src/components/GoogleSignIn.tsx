@@ -1,18 +1,28 @@
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../firebase";
 import "../google-button.css";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../context/UserContext";
 
 const GoogleSignInButton = () => {
   const provider = new GoogleAuthProvider();
+  const navigate = useNavigate();
+  const { setUser } = useUser();
 
   const handleSignIn = async () => {
     try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      console.log("User signed in:", user);
+      await signInWithPopup(auth, provider);
+      localStorage.setItem("user", "1");
       // Handle successful sign-in here
+      const user = auth.currentUser;
+      if (user) {
+        setUser(user);
+      }
+
+      navigate("/");
     } catch (error) {
-      console.error("Error signing in:", error);
+      alert("Error signing in");
+      navigate("/sign-up");
       // Handle errors here
     }
   };

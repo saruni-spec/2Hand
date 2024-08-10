@@ -2,26 +2,31 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
+
   
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   width: 50%;
-  margin-left: 25%;
+
+ margin: 3% 0;
+ padding: 1% 2%;
 }
 
 .uniform-form label {
   font-weight: bold;
   margin-top: 1rem;
   align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin: 3%;
  
 }
 
-.uniform-form input {
-  width: 100%;
-  padding: 0.8rem;
-  
-  font-size: 1rem;
+.uniform-form input,select {
+  width:50%;
+  margin: 2%;
  
   
 
@@ -29,21 +34,21 @@
 
 .uniform-form input[type="file"] {
   border: none;
-  padding: 0;
+
 }
 
 .uniform-form button {
   margin-top: 1.5rem;
 
-  padding: 0.8rem 1.5rem;
+ 
 
 }
 
 
 .uniform-form img{
-margin: 3%;
+
 width: 80%;
-height: max-content;
+
 }
 
 
@@ -100,7 +105,14 @@ height: max-content;
   font-size: 1.1rem;
 }
 
-
+.radioGroup{
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 2.5rem 0;
+}
 
 .confirm div button{
 margin: 4%;
@@ -152,29 +164,10 @@ border: none;
 @media screen and (max-width: 800px) {
 .uniform-form {
   width: 90%;
-  margin-left: 5%;
+
  
 }
 
-.uniform-form label {
-  font-weight: bold;
-  margin-top: 1rem;
-  align-self: flex-start;
-}
-
-
-.uniform-form input[type="file"] {
-  border: none;
-  padding: 0;
-}
-
-
-
-.uniform-form img{
-margin: 3%;
-width: 80%;
-height: max-content;
-}
 .confirm {
 display: flex;
 flex-direction:column;

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import Nav from "../components/Nav";
-import Footer from "../components/Footer";
+
 import { auth, db } from "../firebase";
 import {
   CollectionReference,
@@ -110,7 +109,6 @@ const Profile = () => {
       });
 
       setIsLoading(false);
-      console.log("User", user);
 
       return () => unsubscribe();
     }, 1500);
@@ -131,7 +129,6 @@ const Profile = () => {
       const querySnapshot = await getDocs(salesQuery);
 
       if (querySnapshot.empty) {
-        console.log("No sales found");
         return;
       }
       const sales: Data[] = [];
@@ -155,7 +152,7 @@ const Profile = () => {
       });
       setSales(sales);
     } catch (error) {
-      console.log("Error fetching sales", error);
+      alert("Error fetching sales");
     }
   };
 
@@ -176,7 +173,6 @@ const Profile = () => {
       const querySnapshot = await getDocs(purchasesQuery);
 
       if (querySnapshot.empty) {
-        console.log("No purchases found");
         return;
       }
       const purchases: Data[] = [];
@@ -199,7 +195,7 @@ const Profile = () => {
       });
       setPurchases(purchases);
     } catch (error) {
-      console.log("Error fetching purchases", error);
+      alert("Error fetching purchases");
     }
   };
 
@@ -211,7 +207,7 @@ const Profile = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    console.log("submitting form");
+
     const user = auth.currentUser;
     if (user) {
       const form = e.currentTarget;
@@ -222,16 +218,6 @@ const Profile = () => {
       const town = form.town.value;
       const city = form.city.value;
       const address = form.address.value;
-
-      console.log(
-        "Form data",
-        userName,
-        email,
-        phoneNumber,
-        town,
-        city,
-        address
-      );
 
       const storage = getStorage();
       const storageRef1 = ref(storage, `user-photos/${user.email}`);
@@ -248,11 +234,11 @@ const Profile = () => {
           photoURL: downloadURL1,
         })
           .then(() => {
-            console.log("Profile updated");
+            alert("Profile updated");
           })
           .catch((error) => {
+            alert("Profile Not Updated");
             console.log(error);
-            // ...
           });
       }
 
@@ -277,7 +263,6 @@ const Profile = () => {
                 city,
               });
             });
-            console.log("User Profile updated");
           } else {
             // Document does not exist, create a new one
             setDoc(doc(collection(db, "users")), {
@@ -293,166 +278,160 @@ const Profile = () => {
           setIsLoading(false);
         })
         .catch((error) => {
-          console.log("Error updating profile", error);
+          console.log(error);
+          alert("Error updating profile");
         });
     }
   };
 
   return (
     <>
-      <Nav />
-      <div className="homeDiv">
-        <ul className="section">
-          <li
-            onClick={() => {
-              setSection("profile");
-            }}
-          >
-            Profile
-          </li>
-          <li onClick={salesSection}>Sales</li>
-          <li onClick={purchasesSection}>Purchases</li>
-        </ul>
-        {isLoading && <div className="loader"></div>}
+      <ul className="section">
+        <li
+          onClick={() => {
+            setSection("profile");
+          }}
+        >
+          Profile
+        </li>
+        <li onClick={salesSection}>Sales</li>
+        <li onClick={purchasesSection}>Purchases</li>
+      </ul>
+      {isLoading && <div className="loader"></div>}
 
-        {!isLoading && user && (
-          <div className="profile">
-            {currentSection === "profile" && (
-              <form className="myProfile" onSubmit={handleSubmit}>
-                <div id="profileImage">
-                  <div id="photo-div">
-                    <img
-                      src={user?.photoURL || undefined}
-                      alt="profile photo"
-                    />
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <label htmlFor="photo">Photo</label>
+      {!isLoading && user && (
+        <div className="profile">
+          {currentSection === "profile" && (
+            <form className="myProfile" onSubmit={handleSubmit}>
+              <div id="profileImage">
+                <div id="photo-div">
+                  <img src={user?.photoURL || undefined} alt="profile photo" />
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <label htmlFor="photo">Photo</label>
 
-                    <input type="file" id="photo" name="photo" />
-                  </div>
+                  <input type="file" id="photo" name="photo" />
                 </div>
-                <div>
-                  <label htmlFor="userName">Name</label>
-                  <input
-                    type="text"
-                    id="userName"
-                    name="userName"
-                    defaultValue={user?.userName || undefined}
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="email">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    defaultValue={user?.email || undefined}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="phoneNumber">Phone Number</label>
-                  <input
-                    type="number"
-                    id="phoneNumber"
-                    name="phoneNumber"
-                    defaultValue={user?.phoneNumber}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="town">Town</label>
-                  <input
-                    type="text"
-                    id="town"
-                    name="town"
-                    defaultValue={user?.town}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="city">City</label>
-                  <input
-                    type="city"
-                    id="city"
-                    name=""
-                    defaultValue={user?.city}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="address">Adress</label>
-                  <input
-                    type="text"
-                    id="address"
-                    name="address"
-                    defaultValue={user?.address}
-                  />
-                </div>
-                <div>
-                  <button type="submit">
-                    Save Changes
-                    <FontAwesomeIcon icon={faCloudArrowUp} />
-                  </button>
-                </div>
-              </form>
-            )}
-            {currentSection === "sales" && (
-              <div className="receipt">
-                {sales.length > 0 && (
-                  <ul>
-                    {sales.map((sale, index) => (
-                      <li key={index}>
-                        <ImagePreview
-                          image={[sale.image1, sale.image2, sale.image3]}
-                        />
-                        <div>
-                          <p>{sale.clothType}</p>
-                          <p>{sale.price} ksh</p>
-                          <p>{sale.quantity} available</p>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                {sales.length === 0 && <p>No sales found</p>}
               </div>
-            )}
-            {currentSection === "purchases" && (
-              <div className="receipt">
-                {purchases.length === 0 && <p>No purchases found</p>}
-                {purchases.length > 0 && (
-                  <ul>
-                    {purchases.map((purchase, index) => (
-                      <li key={index}>
-                        <ImagePreview
-                          image={[
-                            purchase.image1,
-                            purchase.image2,
-                            purchase.image3,
-                          ]}
-                        />
-
-                        <div>
-                          <p>{purchase.clothType}</p>
-                          <p>{purchase.price} ksh</p>
-                          <p>{purchase.quantity} available</p>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                )}
+              <div>
+                <label htmlFor="userName">Name</label>
+                <input
+                  type="text"
+                  id="userName"
+                  name="userName"
+                  defaultValue={user?.userName || undefined}
+                />
               </div>
-            )}
-          </div>
-        )}
-      </div>
-      <Footer />
+
+              <div>
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  defaultValue={user?.email || undefined}
+                />
+              </div>
+              <div>
+                <label htmlFor="phoneNumber">Phone Number</label>
+                <input
+                  type="number"
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  defaultValue={user?.phoneNumber}
+                />
+              </div>
+              <div>
+                <label htmlFor="town">Town</label>
+                <input
+                  type="text"
+                  id="town"
+                  name="town"
+                  defaultValue={user?.town}
+                />
+              </div>
+              <div>
+                <label htmlFor="city">City</label>
+                <input
+                  type="city"
+                  id="city"
+                  name=""
+                  defaultValue={user?.city}
+                />
+              </div>
+              <div>
+                <label htmlFor="address">Adress</label>
+                <input
+                  type="text"
+                  id="address"
+                  name="address"
+                  defaultValue={user?.address}
+                />
+              </div>
+              <div>
+                <button type="submit">
+                  Save Changes
+                  <FontAwesomeIcon icon={faCloudArrowUp} />
+                </button>
+              </div>
+            </form>
+          )}
+          {currentSection === "sales" && (
+            <div className="receipt">
+              {sales.length > 0 && (
+                <ul>
+                  {sales.map((sale, index) => (
+                    <li key={index}>
+                      <ImagePreview
+                        image={[sale.image1, sale.image2, sale.image3]}
+                      />
+                      <div>
+                        <p>{sale.clothType}</p>
+                        <p>{sale.price} ksh</p>
+                        <p>{sale.quantity} available</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {sales.length === 0 && <p>No sales found</p>}
+            </div>
+          )}
+          {currentSection === "purchases" && (
+            <div className="receipt">
+              {purchases.length === 0 && <p>No purchases found</p>}
+              {purchases.length > 0 && (
+                <ul>
+                  {purchases.map((purchase, index) => (
+                    <li key={index}>
+                      <ImagePreview
+                        image={[
+                          purchase.image1,
+                          purchase.image2,
+                          purchase.image3,
+                        ]}
+                      />
+
+                      <div>
+                        <p>{purchase.clothType}</p>
+                        <p>{purchase.price} ksh</p>
+                        <p>{purchase.quantity} available</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
+        </div>
+      )}
     </>
   );
 };

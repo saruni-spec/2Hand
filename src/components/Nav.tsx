@@ -1,9 +1,7 @@
-import "../nav.css";
+import { Link, useNavigate } from "react-router-dom";
 import Menu from "./menu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
-
-import { useNavigate } from "react-router-dom";
 
 const Nav = () => {
   const navigate = useNavigate();
@@ -12,29 +10,28 @@ const Nav = () => {
     <div className="nav">
       <div className="top-bar">
         <Menu />
-        <h3 onClick={() => navigate("/")}>Nuriaa</h3>
-
-        <a href="/login" id="a">
+        <p onClick={() => navigate("/")}>Nuriaa</p>
+        <Link to="/login" id="a">
           Sign In
-        </a>
+        </Link>
       </div>
       <ul className="nav-bar">
         <li>
-          <a href="/">Home</a>
+          <Link to="/">Home</Link>
         </li>
         <li>
-          <a href="/shop">Shop</a>
+          <Link to="/shop">Shop</Link>
         </li>
         <li>
-          <a href="/about">About</a>
+          <Link to="/about">About</Link>
         </li>
         <li>
-          <a href="/add-item">Sell</a>
+          <Link to="/add-item">Sell</Link>
         </li>
         <li>
-          <a href="/cart">
+          <Link to="/cart">
             Cart <FontAwesomeIcon icon={faCartShopping} />
-          </a>
+          </Link>
         </li>
       </ul>
     </div>

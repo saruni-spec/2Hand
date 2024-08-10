@@ -3,7 +3,7 @@ import "../form.css";
 
 const apiKey = import.meta.env.VITE_MAIL_SEND;
 
-const Contact = () => {
+const MakeDonations = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -37,8 +37,13 @@ const Contact = () => {
 
   return (
     <>
-      <h2>Thank you for your visit to Nuria</h2>
-      <p>Please fill in the form to complete the process</p>
+      <h2>Interested in making a donation?</h2>
+      <p>
+        Thank you for considering donating your uniform to us. Your generosity
+        will help those in need and make a difference in their lives. Please
+        fill out the form below so we can contact you and proceed with the
+        donation process.
+      </p>
       <form className="uniform-form" onSubmit={handleSubmit}>
         <label>
           Name:
@@ -63,8 +68,9 @@ const Contact = () => {
         </label>
 
         <label>
-          Message
-          <textarea
+          Phone:
+          <input
+            type="tel"
             name="phone"
             value={formData.phone}
             onChange={handleChange}
@@ -78,4 +84,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default MakeDonations;

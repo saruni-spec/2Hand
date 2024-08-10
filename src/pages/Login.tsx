@@ -1,11 +1,9 @@
 import "../otherforms.css";
-import Nav from "../components/Nav";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
-import { useNavigate, useLocation } from "react-router-dom";
-import { FirebaseError } from "firebase/app";
+
+import { useNavigate } from "react-router-dom";
+
 import black from "../assets/images/black.avif";
-import Footer from "../components/Footer";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faRightToBracket,
@@ -13,35 +11,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import GoogleSignInButton from "../components/GoogleSignIn";
 import "../google-button.css";
+import { useUser } from "../context/UserContext";
 
 const Login = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { from } = location.state || { from: "/" };
 
-  const handleLogin = async (email: string, password: string) => {
-    try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      // User is signed in, handle success (optional)
-      console.log("User signed in:", userCredential.user);
-
-      navigate(`/${from}`);
-    } catch (error) {
-      if (error instanceof Error) {
-        const errorMessage = error.message;
-        console.error("Sign in error:", errorMessage);
-      }
-      if (error instanceof FirebaseError) {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.error("Sign in error:", errorCode, errorMessage);
-      }
-    }
-  };
+  const { handleLogin } = useUser();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -65,7 +40,6 @@ const Login = () => {
 
   return (
     <>
-      <Nav />
       <div className="formDiv">
         <form className="login" onSubmit={handleSubmit}>
           <input
@@ -104,7 +78,6 @@ const Login = () => {
           }}
         ></div>
       </div>
-      <Footer />
     </>
   );
 };

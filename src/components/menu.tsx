@@ -25,7 +25,6 @@ const Menu = () => {
   const [menuVisible, setMenuVisible] = useState(false);
 
   const toggleMenuVisible = () => {
-    console.log("menu toggles");
     setMenuVisible(!menuVisible);
   };
 

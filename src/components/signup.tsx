@@ -8,13 +8,8 @@ import { FirebaseError } from "firebase/app";
 
 const Login = async (email: string, password: string) => {
   try {
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+    await signInWithEmailAndPassword(auth, email, password);
     // User is signed in, handle success (optional)
-    console.log("User signed in:", userCredential.user);
   } catch (error) {
     if (error instanceof Error) {
       const errorMessage = error.message;

@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
-import Nav from "../components/Nav";
+import React, { useState } from "react";
+
 import "../form.css";
-import { db, auth } from "../firebase";
+import { db } from "../firebase";
 import { addDoc, collection } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import ImagePreview from "../components/ImagePreview";
+import { useUser } from "../context/UserContext";
 
 interface ItemData {
   clothType: string;
@@ -19,6 +20,7 @@ interface ItemData {
   quantity: string;
   size: string;
   color?: string;
+  gender?: string;
 }
 
 const AddItem = () => {
@@ -26,24 +28,17 @@ const AddItem = () => {
   const [confirm, setConfirm] = useState(false);
 
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true); // Add a loading state
+  const [isLoading, setIsLoading] = useState(false); // Add a loading state
 
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      const user = auth.currentUser;
-      if (!user) {
-        navigate(`/login`, { state: { from: "add-item" } });
-      }
-      console.log(user, "use cart");
-      setIsLoading(false); // Set loading to false after check
-      console.log(user, "use cart");
-    }, 1500); // Delay by 1 second
-
-    return () => clearTimeout(timeoutId); // Clear timeout on cleanup
-  }, []);
+  const { user } = useUser();
 
   const AddUniform = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!user) {
+      navigate("/login");
+      return;
+    }
 
     const form = e.currentTarget;
     const file1 = form.image1.files?.[0];
@@ -70,54 +65,59 @@ const AddItem = () => {
         quantity: form.quantity.value,
         size: form.size.value,
         color: form.color.value,
+        gender: form.gender.value,
       });
       setConfirm(true);
     }
   };
 
   const postItem = async (item: ItemData) => {
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+
     setIsLoading(true); // Set loading to true
-    const user = auth.currentUser;
-    if (user) {
-      try {
-        const storage = getStorage();
-        // Upload the image to Firebase Storage
-        // Get the download URL of the uploaded image
-        const storageRef1 = ref(storage, `uniforms/${item.clothType}`);
-        await uploadBytes(storageRef1, item.image);
-        const downloadURL1 = await getDownloadURL(storageRef1);
 
-        const storageRef2 = ref(storage, `uniforms/${item.clothType}`);
-        await uploadBytes(storageRef2, item.image);
-        const downloadURL2 = await getDownloadURL(storageRef2);
+    try {
+      const storage = getStorage();
+      // Upload the image to Firebase Storage
+      // Get the download URL of the uploaded image
+      const storageRef1 = ref(storage, `uniforms/${item.clothType}`);
+      await uploadBytes(storageRef1, item.image);
+      const downloadURL1 = await getDownloadURL(storageRef1);
 
-        const storageRef3 = ref(storage, `uniforms/${item.clothType}`);
-        await uploadBytes(storageRef3, item.image);
-        const downloadURL3 = await getDownloadURL(storageRef3);
+      const storageRef2 = ref(storage, `uniforms/${item.clothType}`);
+      await uploadBytes(storageRef2, item.image);
+      const downloadURL2 = await getDownloadURL(storageRef2);
 
-        // Save the item data, including the image download URL, to Firestore
-        const docRef = await addDoc(collection(db, "uniforms"), {
-          clothType: item.clothType,
-          description: item.description,
-          image1: downloadURL1,
-          image2: downloadURL2,
-          image3: downloadURL3,
-          price: item.price,
-          category: item.category,
-          label: item.label,
-          quantity: item.quantity,
-          size: item.size,
-          color: item.color,
-          seller: user.uid,
-        });
-        console.log("Document written with ID: ", docRef.id);
-        setConfirm(false);
-        setItem(null);
-        setImageList([]); // Clear the image preview
-        setIsLoading(false); // Set loading to false
-      } catch (e) {
-        console.error("Error adding document: ", e);
-      }
+      const storageRef3 = ref(storage, `uniforms/${item.clothType}`);
+      await uploadBytes(storageRef3, item.image);
+      const downloadURL3 = await getDownloadURL(storageRef3);
+
+      // Save the item data, including the image download URL, to Firestore
+      await addDoc(collection(db, "uniforms"), {
+        clothType: item.clothType,
+        description: item.description,
+        image1: downloadURL1,
+        image2: downloadURL2,
+        image3: downloadURL3,
+        price: item.price,
+        category: item.category,
+        label: item.label,
+        quantity: item.quantity,
+        size: item.size,
+        color: item.color,
+        gender: item.gender,
+        seller: user.uid,
+      });
+
+      setConfirm(false);
+      setItem(null);
+      setImageList([]); // Clear the image preview
+      setIsLoading(false); // Set loading to false
+    } catch (e) {
+      console.error("Error adding document: ", e);
     }
   };
 
@@ -129,41 +129,44 @@ const AddItem = () => {
   const [quantity, setQuantity] = useState("1");
   const [size, setSize] = useState("Size");
   const [color, setColor] = useState("");
+  const [gender, setGender] = useState("both");
 
   const [imageList, setImageList] = useState<string[]>([]);
 
   return (
     <>
-      <Nav />
-      <div className="homeDiv">
-        {isLoading ? (
-          <div className="loader"></div> // Display loading indicator while fetching user
-        ) : !confirm ? (
-          <form className="uniform-form" onSubmit={AddUniform}>
-            <div className="select">
-              <label>Cloth Type : {itemType}</label>
-              <select
-                name="clothType"
-                id="clothType"
-                title="Cloth Type"
-                required
-                defaultValue={itemType}
-                onChange={(e) => setItemType(e.target.value)}
-              >
-                <option value="">Select Item Type</option>
-                <option value="shirt">Shirt</option>
-                <option value="sweater">Sweater</option>
-                <option value="tie">Tie</option>
-                <option value="shorts">Shorts</option>
-                <option value="pants">Pants</option>
-                <option value="trackSuit">Track Suit</option>
-                <option value="socks">Socks</option>
-                <option value="shoes">Shoes</option>
-                <option value="sports">Sports</option>
-                <option value="tshirt">T-Shirt</option>
-              </select>
-            </div>
-            <label>Description</label>
+      {isLoading ? (
+        <div className="loader"></div> // Display loading indicator while fetching user
+      ) : !confirm ? (
+        <form className="uniform-form" onSubmit={AddUniform}>
+          <label>
+            Cloth Type
+            <select
+              name="clothType"
+              id="clothType"
+              title="Cloth Type"
+              required
+              defaultValue={itemType}
+              onChange={(e) => setItemType(e.target.value)}
+            >
+              <option value="">Select Item Type</option>
+              <option value="shirt">Shirt</option>
+              <option value="sweater">Sweater</option>
+              <option value="tie">Tie</option>
+              <option value="shorts">Shorts</option>
+              <option value="skirt">Skirt</option>
+              <option value="dress">Dress</option>
+              <option value="pants">Pants</option>
+              <option value="trackSuit">Track Suit</option>
+              <option value="socks">Socks</option>
+              <option value="shoes">Shoes</option>
+              <option value="sports">Sports</option>
+              <option value="tshirt">T-Shirt</option>
+            </select>
+          </label>
+
+          <label>
+            Description
             <input
               type="text"
               name="description"
@@ -173,8 +176,122 @@ const AddItem = () => {
               onChange={(e) => setDescription(e.target.value)}
               required
             />
+          </label>
 
-            <label>Images</label>
+          <label>
+            Category
+            <select
+              title="category"
+              name="category"
+              id="category"
+              required
+              defaultValue={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="">Select Item Category</option>
+              <option value="kindergarten">Kindergarten</option>
+              <option value="lowerSchool">Lower School</option>
+              <option value="middleSchool">Middle School</option>
+              <option value="juniorHigh">Junior High</option>
+              <option value="seniorHigh">Senior High</option>
+              <option value="college">College</option>
+            </select>
+          </label>
+
+          <label>
+            Label
+            <input
+              type="text"
+              name="label"
+              id="label"
+              defaultValue={label}
+              placeholder="Enter School if label present"
+              onChange={(e) => setLabel(e.target.value)}
+            />
+          </label>
+
+          <label>
+            Quantity
+            <input
+              type="number"
+              name="quantity"
+              id="quantity"
+              defaultValue={quantity}
+              placeholder="Enter Item Quantity"
+              onChange={(e) => setQuantity(e.target.value)}
+            />
+          </label>
+
+          <label>
+            Size
+            <select
+              title="size"
+              name="size"
+              id="size"
+              required
+              defaultValue={size}
+              onChange={(e) => setSize(e.target.value)}
+            >
+              <option value="">Select Item Size</option>
+              <option value="very small">Very Small</option>
+              <option value="small">Small</option>
+              <option value="medium">Medium</option>
+              <option value="large">Large</option>
+              <option value="very large">Very Large</option>
+            </select>
+          </label>
+
+          <label>
+            Color
+            <p>Select Color</p>
+            <input
+              required
+              title="select color"
+              name="color"
+              id="color"
+              type="color"
+              defaultValue={color}
+              placeholder="Enter Item Color"
+              onChange={(e) => setColor(e.target.value)}
+            />
+          </label>
+
+          <div className="radioGroup">
+            {gender}
+            <label htmlFor="both">
+              All
+              <input
+                type="radio"
+                id="both"
+                name="gender"
+                value="both"
+                onChange={() => setGender("both")}
+              />
+            </label>
+            <label htmlFor="male">
+              Male
+              <input
+                type="radio"
+                id="male"
+                name="gender"
+                value="male"
+                onChange={() => setGender("male")}
+              />
+            </label>
+            <label htmlFor="female">
+              Female
+              <input
+                type="radio"
+                id="female"
+                name="gender"
+                value="female"
+                onChange={() => setGender("female")}
+              />
+            </label>
+          </div>
+
+          <label>
+            Images
             <div id="image-input">
               <input
                 required
@@ -220,8 +337,9 @@ const AddItem = () => {
               />
             </div>
             {imageList && <ImagePreview image={imageList} />}
-
-            <label>Price</label>
+          </label>
+          <label>
+            Price
             <input
               type="number"
               name="price"
@@ -230,133 +348,68 @@ const AddItem = () => {
               placeholder="Enter Item Price"
               onChange={(e) => setPrice(e.target.value)}
             />
-            <div className="select">
-              <label>Category : {category}</label>
-
-              <select
-                title="category"
-                name="category"
-                id="category"
-                required
-                defaultValue={category}
-                onChange={(e) => setCategory(e.target.value)}
-              >
-                <option value="">Select Item Category</option>
-                <option value="kindergarten">Kindergarten</option>
-                <option value="lowerSchool">Lower School</option>
-                <option value="middleSchool">Middle School</option>
-                <option value="juniorHigh">Junior High</option>
-                <option value="seniorHigh">Senior High</option>
-                <option value="college">College</option>
-              </select>
+          </label>
+          <button type="submit">Add Item</button>
+        </form>
+      ) : (
+        confirm &&
+        item && (
+          <div className="confirm">
+            <div className="row1">
+              <ImagePreview image={imageList} />
             </div>
-            <label>Label</label>
-            <input
-              type="text"
-              name="label"
-              id="label"
-              defaultValue={label}
-              placeholder="Enter School if label present"
-              onChange={(e) => setLabel(e.target.value)}
-            />
-            <label>Quantity</label>
-            <input
-              type="number"
-              name="quantity"
-              id="quantity"
-              defaultValue={quantity}
-              placeholder="Enter Item Quantity"
-              onChange={(e) => setQuantity(e.target.value)}
-            />
-            <div className="select">
-              <label>Size : {size}</label>
-              <select
-                title="size"
-                name="size"
-                id="size"
-                required
-                defaultValue={size}
-                onChange={(e) => setSize(e.target.value)}
-              >
-                <option value="">Select Item Size</option>
-                <option value="very small">Very Small</option>
-                <option value="small">Small</option>
-                <option value="medium">Medium</option>
-                <option value="large">Large</option>
-                <option value="very large">Very Large</option>
-              </select>
-            </div>
-            <label>Color</label>
-            <p>Select Color</p>
-            <input
-              required
-              title="select color"
-              name="color"
-              id="color"
-              type="color"
-              defaultValue={color}
-              placeholder="Enter Item Color"
-              onChange={(e) => setColor(e.target.value)}
-            />
-            <button type="submit">Add Item</button>
-          </form>
-        ) : (
-          confirm &&
-          item && (
-            <div className="confirm">
-              <div className="row1">
-                <ImagePreview image={imageList} />
-              </div>
-              <div className="row2">
-                <ul>
-                  <li>
-                    <p>Type : {item.clothType}</p>
-                  </li>
-                  <li>
-                    <p>Description : {item.description}</p>
-                  </li>
-                  <li>
-                    <p>Price : {item.price}</p>
-                  </li>
-                  <li>
-                    <p>Category : {item.category}</p>
-                  </li>
-                  <li>
-                    <p>School label : {item.label}</p>
-                  </li>
-                  <li>
-                    <p>Size : {item.size}</p>
-                  </li>
-                  <li>
-                    <p>Quantity : {item.quantity}</p>
-                  </li>
-                  <li>
-                    <p>Color : {item.color}</p>
-                  </li>
-                </ul>
-                <div className="row2buttons">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setConfirm(false);
-                    }}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      postItem(item);
-                    }}
-                  >
-                    Confirm
-                  </button>
-                </div>
+            <div className="row2">
+              <ul>
+                <li>
+                  <p>Type : {item.clothType}</p>
+                </li>
+                <li>
+                  <p>Gender : {item.gender}</p>
+                </li>
+                <li>
+                  <p>Description : {item.description}</p>
+                </li>
+                <li>
+                  <p>Price : {item.price}</p>
+                </li>
+                <li>
+                  <p>Category : {item.category}</p>
+                </li>
+                <li>
+                  <p>School label : {item.label}</p>
+                </li>
+                <li>
+                  <p>Size : {item.size}</p>
+                </li>
+                <li>
+                  <p>Quantity : {item.quantity}</p>
+                </li>
+                <li>
+                  <p>Color : {item.color}</p>
+                </li>
+              </ul>
+              <div className="row2buttons">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setConfirm(false);
+                  }}
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    postItem(item);
+                  }}
+                >
+                  Confirm
+                </button>
               </div>
             </div>
-          )
-        )}
-      </div>
+          </div>
+        )
+      )}
     </>
   );
 };
