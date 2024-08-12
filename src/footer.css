@@ -17,6 +17,7 @@
     flex-direction: column;
     width: 30%;
     color: black;
+    text-align: left;
 }
 .emailForm button{
     outline: 2px solid #A09F9D;

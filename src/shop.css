@@ -70,15 +70,23 @@ span{
   width: 40%;
   height: 50%;
 }
-.close-preview{
-  position: fixed;
-  top:20%;
-  left:80%;
+.previiewButtons{
+  width: 100%;
 }
-.close-preview:hover{
-  color: black;
-  border: 1px solid black;
+.previiewButtons button{
+  width: 50%;
+  margin: 0;
+  
 }
+.closePreview{
+  border-top-right-radius:0 ;
+  border-bottom-right-radius: 0;
+}
+.cartButton{
+  border-top-left-radius:0 ;
+  border-bottom-left-radius: 0;
+}
+
 
 
 @media screen and (max-width: 800px) {
@@ -121,15 +129,35 @@ width: 95%;
  
 }
 
-.close-preview{
+.previiewButtons{
+  position: fixed;
+  bottom: 0;
  
-  top:17%;
-  left:90%;
-  z-index: 10;
 }
+
+.closePreview{
+  background-color: #A09F9D;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 10px;
+}
+.cartButton{
+  
+  
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 10px;
+  background-color: lemonchiffon;
+}
+
+
+
 #data-div{
-  padding: 0 4%;
+  
   width: 100%;
+  
  
+}
+#data-div p{
+ 
+ padding: 0 4.5%;
 }
 }

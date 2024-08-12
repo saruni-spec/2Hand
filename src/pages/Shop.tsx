@@ -16,7 +16,7 @@ import { useParams } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons/faCartShopping";
-import { faClose } from "@fortawesome/free-solid-svg-icons";
+
 import ImagePreview from "../components/ImagePreview";
 import { useQuery } from "react-query";
 import { useUser } from "../context/UserContext";
@@ -157,16 +157,6 @@ const Shop = () => {
 
           {preview && viewItem && (
             <div className="preview">
-              <button
-                type="button"
-                onClick={() => {
-                  viewCurrentItem(null);
-                }}
-                className="close-preview"
-              >
-                <p> Close</p>
-                <FontAwesomeIcon icon={faClose} />
-              </button>
               <div id="preview-img">
                 <ImagePreview
                   image={[viewItem.image, viewItem.image1, viewItem.image2]}
@@ -191,9 +181,24 @@ const Shop = () => {
                   available:
                   {viewItem.quantity}
                 </p>
-                <button type="button" onClick={() => addToCart(viewItem)}>
-                  Add to cart <FontAwesomeIcon icon={faCartShopping} />
-                </button>
+                <div className="previiewButtons">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      viewCurrentItem(null);
+                    }}
+                    className="closePreview"
+                  >
+                    Continue Shopping
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => addToCart(viewItem)}
+                    className="cartButton"
+                  >
+                    Add to cart <FontAwesomeIcon icon={faCartShopping} />
+                  </button>
+                </div>
               </div>
             </div>
           )}
