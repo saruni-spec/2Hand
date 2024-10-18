@@ -15,6 +15,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { query, collection, where, getDocs, addDoc } from "firebase/firestore";
 
+// Interfaces for different data structures used in the app
 interface CartDetails {
   image: string;
   price: number;
@@ -52,6 +53,7 @@ type UniformType = {
   seller: string;
 };
 
+// This interface defines all the functions and state values that the UserContext provides
 interface UserContextType {
   userDetails: userDetails | null;
   signOut: () => void;
@@ -66,9 +68,12 @@ interface UserContextType {
   setUser: (user: User) => void;
 }
 
+// Create a context to store user data and actions
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
+// Provider component that holds all the state and logic for user actions and state
 export const UserProvider = ({ children }: { children: ReactNode }) => {
+  // State to hold user details, logged in user, cart items, and total price
   const [userDetails, setUserDetails] = useState<userDetails | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [cart, setCart] = useState<CartDetails[]>([]);
@@ -76,6 +81,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
   const navigate = useNavigate();
 
+  // Function to fetch user details from the database using the user's email
   const loadUserDetails = async (email: string | null) => {
     const userQuery = query(
       collection(db, "Users"),
@@ -86,6 +92,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     if (querySnapshot.empty) {
       setUserDetails(null);
     } else {
+      // Set the first user's details in state
       const userDetails = querySnapshot.docs.map((doc) => doc.data());
       setUserDetails(
         userDetails[0] as {
@@ -98,18 +105,19 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  // Function to log in a user with email and password
   const handleLogin = async (email: string, password: string) => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      // User is signed in, handle success (optional)
+      // On success, store user data locally and update the user state
       localStorage.setItem("user", "1");
       const user = auth.currentUser;
       if (user) {
         setUser({ email: user.email, uid: user.uid });
       }
 
-      loadUserDetails(email);
-      navigate("/");
+      loadUserDetails(email); // Load user's additional details
+      navigate("/"); // Navigate to home after login
     } catch (error) {
       if (error instanceof Error) {
         const errorMessage = error.message;
@@ -123,6 +131,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  // Function to sign up a new user, send email verification, and log them in
   const handleSignUp = async (email: string, password: string) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -130,17 +139,16 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         email,
         password
       );
-      // Send email verification
+      // Send email verification to the new user
       await sendEmailVerification(userCredential.user);
       localStorage.setItem("user_email", JSON.stringify(email));
-      handleLogin(email, password);
+      handleLogin(email, password); // Log in user after signing up
     } catch (error) {
-      // Handle errors appropriately
       console.error("Signup error:", error);
-      // You can display an error message to the user here
     }
   };
 
+  // Function to save user contact details (name, phone, pickUp point) to the database
   const saveDetails = async (name: string, phone: string, pickUp: string) => {
     if (!user?.email) {
       return;
@@ -153,30 +161,21 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         phone,
         pickUp,
       };
-      await addDoc(collection(db, "Users"), userDetails);
-      setUserDetails(userDetails);
+      await addDoc(collection(db, "Users"), userDetails); // Save details to Firestore
+      setUserDetails(userDetails); // Update local state with user details
     } catch (error) {
       console.error("Error saving user details:", error);
     }
   };
 
+  // Function to fetch the user's cart data from Firestore and calculate total price
   const fetchCartData = async () => {
-    console.log("fetching cart");
     if (!user) {
-      console.log("no user not cart");
       setCart([]);
       return;
     }
-    console.log("user cart");
-    const newCart: {
-      image: string;
-      price: number;
-      quantity: number;
-      label: string;
-      category: string;
-      size: string;
-      user: string;
-    }[] = [];
+
+    const newCart: CartDetails[] = [];
 
     const cartQuery = query(
       collection(db, "Cart"),
@@ -186,28 +185,22 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     const querySnapshot = await getDocs(cartQuery);
 
     querySnapshot.forEach((doc) => {
-      const entry = {
-        image: doc.data().image,
-        price: doc.data().price,
-        quantity: doc.data().quantity,
-        size: doc.data().size,
-        category: doc.data().category,
-        label: doc.data().label,
-        user: doc.data().user,
-      };
+      const entry = doc.data() as CartDetails;
       newCart.push(entry);
     });
 
-    setCart(newCart);
+    setCart(newCart); // Update cart state
 
+    // Calculate total price of the cart items
     setTotalPrice(
-      cart.reduce((total, item) => total + Number(item.price), 0).toString()
+      newCart.reduce((total, item) => total + Number(item.price), 0).toString()
     );
   };
 
+  // Function to add a uniform item to the cart
   const addToCart = async (uniform: UniformType) => {
     if (!user) {
-      navigate("/login");
+      navigate("/login"); // Navigate to login if the user is not logged in
       return;
     }
 
@@ -217,46 +210,40 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     }
 
     try {
+      // Add the selected uniform to the Firestore 'Cart' collection
       await addDoc(collection(db, "Cart"), {
-        image: uniform.image,
-        price: uniform.price,
-        quantity: uniform.quantity,
-        label: uniform.label,
-        category: uniform.category,
-        size: uniform.size,
+        ...uniform,
         user: user.email,
-        type: uniform.type,
-        color: uniform.color,
-        description: uniform.description,
-        seller: uniform.seller,
       });
     } catch (e) {
       console.error("Error adding document: ", e);
     }
   };
 
+  // Function to sign the user out and reset the user details
   const signOut = () => {
     setUserDetails(null);
-
     localStorage.removeItem("user");
   };
 
+  // Effect to handle the Firebase authentication state and update the user accordingly
   useEffect(() => {
     const timeout = setTimeout(() => {
       const unsubscribe = auth.onAuthStateChanged((user) => {
         if (user) {
-          setUser(user);
+          setUser(user); // Set user state if authenticated
         } else {
-          setUser(null);
+          setUser(null); // Reset user state if not authenticated
         }
       });
 
       return () => unsubscribe();
     }, 1500);
 
-    return () => clearInterval(timeout);
+    return () => clearInterval(timeout); // Cleanup timeout on component unmount
   }, []);
 
+  // Provide the context to all children components
   return (
     <UserContext.Provider
       value={{
@@ -278,6 +265,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
+// Custom hook to use the UserContext in other components
 export const useUser = (): UserContextType => {
   const context = useContext(UserContext);
   if (context === undefined) {

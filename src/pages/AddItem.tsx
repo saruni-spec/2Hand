@@ -24,27 +24,28 @@ interface ItemData {
 }
 
 const AddItem = () => {
-  const [item, setItem] = useState<ItemData | null>(null);
-  const [confirm, setConfirm] = useState(false);
+  const [item, setItem] = useState<ItemData | null>(null); // State to store form data once it's ready to submit
+  const [confirm, setConfirm] = useState(false); // State to handle confirmation of form submission
+  const navigate = useNavigate(); // Allows redirecting users to different pages
+  const [isLoading, setIsLoading] = useState(false); // State to handle loading indicator
+  const { user } = useUser(); // Get current logged-in user details
 
-  const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false); // Add a loading state
-
-  const { user } = useUser();
-
+  // Form submission handler
   const AddUniform = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission
 
     if (!user) {
-      navigate("/login");
+      navigate("/login"); // Redirect to login if user is not authenticated
       return;
     }
 
+    // Extracting file input values
     const form = e.currentTarget;
-    const file1 = form.image1.files?.[0];
-    let file2 = form.image2.files?.[0];
-    let file3 = form.image3.files?.[0];
+    const file1 = form.image1.files?.[0]; // Primary image file
+    let file2 = form.image2.files?.[0]; // Secondary image file (optional)
+    let file3 = form.image3.files?.[0]; // Tertiary image file (optional)
 
+    // Ensuring all file inputs are filled by duplicating the first file if others are missing
     if (file1) {
       if (!file2) {
         file2 = file1;
@@ -53,6 +54,7 @@ const AddItem = () => {
         file3 = file1;
       }
 
+      // Set the item state with the collected form data
       setItem({
         clothType: form.clothType.value,
         description: form.description.value,
@@ -67,35 +69,36 @@ const AddItem = () => {
         color: form.color.value,
         gender: form.gender.value,
       });
-      setConfirm(true);
+      setConfirm(true); // Show confirmation UI
     }
   };
 
+  // Function to post the item to Firebase (Firestore and Storage)
   const postItem = async (item: ItemData) => {
     if (!user) {
-      navigate("/login");
+      navigate("/login"); // Redirect to login if user is not authenticated
       return;
     }
 
-    setIsLoading(true); // Set loading to true
+    setIsLoading(true); // Start loading animation while uploading
 
     try {
-      const storage = getStorage();
-      // Upload the image to Firebase Storage
-      // Get the download URL of the uploaded image
-      const storageRef1 = ref(storage, `uniforms/${item.clothType}`);
+      const storage = getStorage(); // Initialize Firebase Storage
+
+      // Upload images to Firebase Storage and get their URLs
+      const storageRef1 = ref(storage, `uniforms/${item.clothType}`); // Reference for first image
       await uploadBytes(storageRef1, item.image);
-      const downloadURL1 = await getDownloadURL(storageRef1);
+      const downloadURL1 = await getDownloadURL(storageRef1); // Get URL for first image
 
-      const storageRef2 = ref(storage, `uniforms/${item.clothType}`);
-      await uploadBytes(storageRef2, item.image);
-      const downloadURL2 = await getDownloadURL(storageRef2);
+      const storageRef2 = ref(storage, `uniforms/${item.clothType}`); // Reference for second image
+      await uploadBytes(storageRef2, item.image1);
+      const downloadURL2 = await getDownloadURL(storageRef2); // Get URL for second image
 
-      const storageRef3 = ref(storage, `uniforms/${item.clothType}`);
-      await uploadBytes(storageRef3, item.image);
-      const downloadURL3 = await getDownloadURL(storageRef3);
+      const storageRef3 = ref(storage, `uniforms/${item.clothType}`); // Reference for third image
+      await uploadBytes(storageRef3, item.image2);
+      const downloadURL3 = await getDownloadURL(storageRef3); // Get URL for third image
 
-      // Save the item data, including the image download URL, to Firestore
+      // Add the item data and image URLs to the Firestore database
       await addDoc(collection(db, "uniforms"), {
         clothType: item.clothType,
         description: item.description,
@@ -109,18 +112,20 @@ const AddItem = () => {
         size: item.size,
         color: item.color,
         gender: item.gender,
-        seller: user.uid,
+        seller: user.uid, // Associate the item with the current user
       });
 
+      // Reset states after successful upload
       setConfirm(false);
-      setItem(null);
-      setImageList([]); // Clear the image preview
-      setIsLoading(false); // Set loading to false
+      setItem(null); // Clear item state
+      setImageList([]); // Clear image previews
+      setIsLoading(false); // Stop loading indicator
     } catch (e) {
-      console.error("Error adding document: ", e);
+      console.error("Error adding document: ", e); // Log error if upload fails
     }
   };
 
+  // States to manage form field values for the form controls
   const [itemType, setItemType] = useState("Type");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -130,8 +135,7 @@ const AddItem = () => {
   const [size, setSize] = useState("Size");
   const [color, setColor] = useState("");
   const [gender, setGender] = useState("both");
-
-  const [imageList, setImageList] = useState<string[]>([]);
+  const [imageList, setImageList] = useState<string[]>([]); // To store and preview uploaded images
 
   return (
     <>

@@ -132,6 +132,8 @@ width: 95%;
 .previiewButtons{
   position: fixed;
   bottom: 0;
+  z-index: 6;
+
  
 }
 
@@ -139,9 +141,10 @@ width: 95%;
   background-color: #A09F9D;
   border-bottom-left-radius: 0;
   border-top-left-radius: 10px;
+  padding: 1rem 0;
 }
 .cartButton{
-  
+  padding: 1rem 0;
   
   border-bottom-right-radius: 0;
   border-top-right-radius: 10px;

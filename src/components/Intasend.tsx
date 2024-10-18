@@ -36,7 +36,7 @@ const IntaSendButton = ({
   // Destructure amount prop
   new window.IntaSend({
     publicAPIKey: "ISPubKey_live_2f2708f5-446a-4be2-a8ee-12ab537ee2c9",
-    live: true, //or true for live environment
+    live: true, //set true for live environment
   })
     .on("COMPLETE", (response: Response) => {
       console.log("COMPLETE:", response);
@@ -55,7 +55,8 @@ const IntaSendButton = ({
     <div>
       <button
         className="intaSendPayButton"
-        data-amount={amount} // Set data-amount directly on button
+        // Set data-amount directly on button
+        data-amount={amount}
         data-currency="KES"
         data-email={email}
         data-phone_number={phone}

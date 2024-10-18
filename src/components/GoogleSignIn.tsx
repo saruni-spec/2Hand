@@ -11,10 +11,10 @@ const GoogleSignInButton = () => {
 
   const handleSignIn = async () => {
     try {
-      await signInWithPopup(auth, provider);
-      localStorage.setItem("user", "1");
+      const results = await signInWithPopup(auth, provider);
+
       // Handle successful sign-in here
-      const user = auth.currentUser;
+      const user = results.user;
       if (user) {
         setUser(user);
       }
