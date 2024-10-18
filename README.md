@@ -1,30 +1,35 @@
-# React + TypeScript + Vite
+# Nuriaa - Uniform Shopping Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Nuriaa is a React-based web application designed to provide high-quality uniforms for students and parents. The platform offers a wide selection of durable uniforms while prioritizing affordability and style.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Wide Selection**: Browse a diverse range of uniforms, including brand new and budget-friendly second-hand options.
+- **Affordability**: Quality uniforms at prices that won't break the bank.
+- **Durability**: Reliable clothing designed to withstand daily wear from the classroom to the playground.
+- **User-Friendly Experience**: Smooth browsing and shopping experience with prompt delivery.
+- **Customer Support**: Easily contact us with inquiries or feedback.
 
-- Configure the top-level `parserOptions` property like this:
+## Technologies Used
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- **React**: A JavaScript library for building user interfaces.
+- **TypeScript**: written in Typescript.
+- **Firebase**: Backend services for hosting, authentication, and database management.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Installation
+
+To set up the project locally, follow these steps:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/saruni-spec/2Hand.git
+   ```
